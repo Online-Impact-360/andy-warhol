@@ -14,14 +14,27 @@
 :root {
   --max-content-width: 1440px;
   --rhythm-line-height: 1.5;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 html, body {
   line-height: var(--rhythm-line-height);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 button, a{
   cursor: pointer;
+}
+
+p, span, a, li, div {
+  font-family: var(--font-body);
+  font-weight: 400;
 }
 
 .container {

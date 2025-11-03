@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bodyFont.variable} ${headingFont.variable} antialiased font-sans`}>
+      <body className={`${bodyFont.variable} ${headingFont.variable} antialiase`}>
         {children}
       </body>
     </html>
