@@ -9,7 +9,7 @@ export interface MotionButtonProps extends HTMLMotionProps<"button"> {
   variant?: ButtonVariant;
 }
 
-const baseClasses = "px-5 py-3 font-medium tracking-wide select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-0";
+const baseClasses = "px-2.5 md:px-5 py-1.5 md:py-3 font-medium tracking-wide select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-0";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-gold text-black",

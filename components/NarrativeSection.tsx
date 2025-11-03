@@ -26,7 +26,7 @@ function NarrativeSection() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-12 gap-8 md:gap-14 items-start">
           {/* Left Text Column */}
-          <div className="col-span-12 md:col-span-5">
+          <div className="col-span-12 lg:col-span-5">
             <motion.div
               className="font-serif text-warm-white/90"
               initial={{ opacity: 0, y: 20 }}
@@ -68,7 +68,7 @@ function NarrativeSection() {
           </div>
 
           {/* Right Photo Column */}
-          <div className="col-span-12 md:col-span-7">
+          <div className="col-span-12 lg:col-span-7">
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               {/* Left photo with parallax */}
               <motion.div

@@ -55,6 +55,24 @@ function InquirySection() {
       //   body: JSON.stringify(values),
       // })
       // if (!res.ok) throw new Error('Failed')
+
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+      let data: { success?: boolean; message?: string; errors?: Record<string, string> } | null = null
+      try { data = await res.json() } catch {}
+      if (!res.ok || !data?.success) {
+        if (data?.errors) {
+          setErrors((prev) => ({ ...prev, ...data.errors }))
+        } else {
+          const msg = (data && typeof data.message === 'string' && data.message.trim()) ? data.message : 'Something went wrong. Please try again.'
+          setErrors((prev) => ({ ...prev, form: msg }))
+        }
+        return
+      }
+
       setSent(true)
       setValues({ fullName: '', email: '', role: '', city: '', country: '', message: '' })
       setErrors({})
@@ -75,7 +93,12 @@ function InquirySection() {
         transition={{ duration: 1.5, ease: 'easeOut' }}
         viewport={{ once: true }}
       >
-        <Image src="/man_standing_sideways.png" alt="Warhol silhouette" fill className="object-cover object-left grayscale" />
+        <Image 
+          src="/man_standing_sideways.png" 
+          alt="Warhol silhouette" 
+          fill 
+          className="object-cover object-left grayscale"
+        />
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

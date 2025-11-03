@@ -15,7 +15,7 @@ export default function AboutArtistSection() {
           style={{
             backgroundImage: 'url(/man_standing_sideways.png)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'top'
           }}
           initial={{ scale: 1.1, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 0.2 }}
@@ -49,7 +49,7 @@ export default function AboutArtistSection() {
 
       {/* Marlon Section */}
       <div className="relative bg-black/60 backdrop-blur-sm py-20 px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1440px] mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -128,9 +128,9 @@ export default function AboutArtistSection() {
 
       {/* About Section */}
       <div className="relative py-24 px-8 bg-linear-to-b from-black/60 to-stone-900">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-[1440px] mx-auto">
           <motion.h2 
-            className="text-6xl md:text-7xl font-serif font-bold mb-8"
+            className="text-6xl md:text-7xl font-serif font-bold mb-8 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -142,6 +142,7 @@ export default function AboutArtistSection() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
               style={{ display: 'inline-block' }}
+              className='text-3xl md:text-4xl'
             >
               ABOUT
             </motion.span>
@@ -159,7 +160,7 @@ export default function AboutArtistSection() {
           </motion.h2>
           
           <motion.p 
-            className="text-lg md:text-xl leading-relaxed text-gray-300 mb-12"
+            className="text-lg md:text-xl leading-relaxed text-gray-300 mb-12 text-center max-w-[1000px] mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -173,6 +174,7 @@ export default function AboutArtistSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+            className='flex items-center justify-center'
           >
             <MotionButton variant="ghost">View Biography</MotionButton>
           </motion.div>

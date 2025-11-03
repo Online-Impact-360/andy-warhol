@@ -16,7 +16,7 @@ function ProvenanceSection() {
         <section ref={ref} className="relative w-full text-[#F2F2F2] bg-black py-24 md:py-32 overflow-hidden">
             <div className="max-w-[1440px] mx-auto">
                 <motion.div
-                    className="absolute inset-y-0 right-0 w-[40%] overflow-hidden"
+                    className="absolute inset-y-0 right-0 w-[50%] overflow-hidden block md:hidden"
                     style={{ y: yBg }}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -116,6 +116,25 @@ function ProvenanceSection() {
                             <motion.div className="mt-10" initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, ease: 'easeOut', delay: 0.05 }}>
                                 <MotionButton variant="primary">Request Full Provenance (NDA Required)</MotionButton>
                             </motion.div>
+                        </motion.div>
+
+                        <motion.div
+                            className="relative w-full col-span-6 h-full overflow-hidden hidden md:block"
+                            style={{ y: yBg }}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.6, ease: 'easeOut' }}
+                            aria-hidden
+                        >
+                            <Image
+                                src="/old-doc.webp"
+                                alt="Background document"
+                                fill
+                                className="object-cover object-center opacity-30 blur-[1px] grayscale"
+                                priority={false}
+                            />
+                            <div className="absolute inset-0 bg-gold-overlay"></div>
                         </motion.div>
                     </div>
                 </div>
