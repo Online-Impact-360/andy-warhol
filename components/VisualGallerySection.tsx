@@ -26,109 +26,112 @@ function VisualGallerySection() {
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ['0vw', `-${(slides.length - 1) * 100}vw`]
-    // ['0vw', `-430vw`]
+    ['0vw', `-${(slides.length - 1) * 100}%`],
+    { clamp: false }
   )
 
   // Dynamically calculate height: (slides.length - 1) * 100vh
   const scrollLength = (slides.length - 1) * 100
+
 
   return (
     <section
       className="w-full bg-black"
     >
       <div className='max-w-[1440px] mx-auto relative'>
-      {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex items-start pointer-events-none">
-        <div className="px-6 pt-16">
-          <motion.div
-            className="font-serif text-white"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-tight">
-              A Closer Look
-            </h2>
-          </motion.div>
-          <motion.div
-            className="mt-3 h-px w-40 bg-linear-to-r from-yellow-600 to-transparent"
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
-            style={{ transformOrigin: 'left' }}
-          />
-        </div>
-      </div>
-
-      <section
-        ref={sectionRef}
-        style={{
-          height: `${scrollLength}vh`,
-        }}
-      >
-        {/* Sticky container for horizontal scroll */}
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <motion.div
-            style={{ x }}
-            className="flex h-full items-center"
-          >
-          {slides.map((s, i) => (
-            <div
-              key={i}
-              className="relative w-full h-full shrink-0 flex items-center justify-center"
+        {/* Header */}
+        <div className="absolute top-0 left-0 right-0 z-20 flex items-start pointer-events-none">
+          <div className="px-6 pt-16">
+            <motion.div
+              className="font-serif text-white"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <div className="relative w-[80vw] h-[80vh] overflow-hidden rounded-md border border-white/10">
-                <Image
-                  src={s.src}
-                  alt={s.alt}
-                  fill
-                  className="object-cover object-center"
-                  priority={i === 0}
-                />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />
+              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-tight">
+                A Closer Look
+              </h2>
+            </motion.div>
+            <motion.div
+              className="mt-3 h-px w-40 bg-linear-to-r from-yellow-600 to-transparent"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+              style={{ transformOrigin: 'left' }}
+            />
+          </div>
+        </div>
+        <motion.div
+          className="absolute inset-0 pointer-events-none bg-linear-to-b from-black/20 via-transparent to-black/20"
+          style={{ opacity: useTransform(scrollYProgress, [0, 1], [0.3, 0.7]) }}
+        />
 
-                {/* Caption */}
-                <motion.div
-                  className="absolute bottom-4 left-4 right-4 text-white text-sm md:text-base bg-black/40 px-4 py-2 rounded-md"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
-                >
-                  <span className="text-yellow-500 mr-2">•</span>
-                  {s.caption}
-                </motion.div>
+        <section
+          ref={sectionRef}
+          style={{
+            height: `${scrollLength}vh`,
+          }}
+        >
+          {/* Sticky container for horizontal scroll */}
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <motion.div
+              style={{ x }}
+              className="flex h-full items-center"
+            >
+              {slides.map((s, i) => (
+                <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center">
+                  <motion.div
+                    className="relative w-[80vw] h-[80vh] overflow-hidden rounded-md border border-white/10"
+                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
+                    whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    viewport={{ once: false, amount: 0.5 }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                  >
+                    <Image
+                      src={s.src}
+                      alt={s.alt}
+                      fill
+                      className="object-cover object-center"
+                      priority={i === 0}
+                    />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />
 
-                {/* Counter */}
-                <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded border border-yellow-600/50">
-                  {i + 1} / {slides.length}
+                    <motion.div
+                      className="absolute bottom-4 left-4 right-4 text-white text-sm md:text-base bg-black/40 px-4 py-2 rounded-md"
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, amount: 0.6 }}
+                      transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+                    >
+                      <span className="text-yellow-500 mr-2">•</span>
+                      {s.caption}
+                    </motion.div>
+                  </motion.div>
                 </div>
-              </div>
-            </div>
-          ))}
-          </motion.div>
-        </div>
-      </section>
+              ))}
 
-      {/* Progress bar */}
-      <motion.div
-        className="absolute bottom-6 left-0 right-0 z-20"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-      >
-        <div className="mx-auto px-6">
-          <div className="h-px w-full bg-white/10" />
-          <motion.div
-            style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
-            className="h-[2px] bg-yellow-600"
-          />
-        </div>
-      </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Progress bar */}
+        <motion.div
+          className="absolute bottom-6 left-0 right-0 z-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+        >
+          <div className="mx-auto px-6">
+            <div className="h-px w-full bg-white/10" />
+            <motion.div
+              style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+              className="h-[2px] bg-yellow-600"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   )

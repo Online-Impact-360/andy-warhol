@@ -5,9 +5,9 @@ import MotionButton from "@/components/MotionButton"
 
 function HeroSection() {
     return (
-        <section className="h-screen bg-black overflow-x-hidden">
-            <div className="max-w-[1440px] mx-auto relative h-full overflow-hidden" >
-                <div className="absolute top-[5%] left-[5%] bottom-[5%] w-[75%] overflow-hidden">
+        <section className="h-screen bg-black overflow-x-hidden max-h-[1500px]">
+            <div className="max-w-[1440px] mx-auto relative h-full overflow-hidden p-2" >
+                <div className="absolute top-[5%] left-[5%] bottom-[5%] w-[90%] md:w-[75%] overflow-hidden">
                     <motion.div
                         initial={{ scale: 1, x: "0%", y: "0%" }}
                         animate={{
@@ -21,29 +21,22 @@ function HeroSection() {
                             repeat: Infinity,
                             repeatType: "mirror",
                         }}
-                        className="relative w-full h-full"
+                        className="relative w-full h-full image-wrapper"
                     >
                         <Image
-                            src="/man-black-hood-looking-down.jpg"
+                            src="/marlon.png"
                             alt="Brando silkscreen background"
                             fill
                             priority
-                            className="object-cover object-center grayscale"
+                            className="object-cover object-top img"
                         />
+                         <div className="yellow-overlay"></div>
                     </motion.div>
                 </div>
 
-                <div className="absolute inset-0 z-10 pointer-events-none"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%)",
-                    }}
-                />
-
                 <div className="relative z-20 h-full w-full flex flex-col items-center justify-end pb-24 text-center">
                     <motion.h1
-                        className="text-warm-white font-serif font-bold tracking-normal"
-                        style={{ fontSize: "68px" }}
+                        className="text-warm-white text-[40px] md:text-[60px] font-serif font-bold tracking-normal"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -51,8 +44,7 @@ function HeroSection() {
                         Hidden for Decades. Now Revealed
                     </motion.h1>
                     <motion.p
-                        className="mt-6 max-w-3xl mx-auto text-warm-white"
-                        style={{ fontSize: "22px" }}
+                        className="mt-3 md:mt-6 text-lg md:text-xl max-w-3xl mx-auto text-warm-white"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
@@ -60,7 +52,7 @@ function HeroSection() {
                         A rare private silkscreen of Marlon Brando emerging from decades of obscurity in the hands of Warhol’s trusted inner circle.
                     </motion.p>
                     <motion.div
-                        className="mt-8 flex items-center gap-4"
+                        className="mt-8 flex items-center gap-2 md:gap-4 flex-col md:flex-row"
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
@@ -71,7 +63,7 @@ function HeroSection() {
                 </div>
 
                 <motion.div
-                    className="absolute right-[3%] top-[20%] bottom-0 w-[460px] overflow-hidden"
+                    className="absolute right-px md:top-[20%] bottom-0 w-[200px] h-[300px] md:h-full md:w-[460px] overflow-hidden"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}

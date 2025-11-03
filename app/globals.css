@@ -62,3 +62,45 @@ button, a{
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
+.image-wrapper {
+    position: relative;
+    display: inline-block; /* Or block, depending on layout */
+}
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 1500px rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+.image-wrapper .img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+}
+.yellow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: #FFD700;  */
+    background-color: #E4C00F; 
+    /* Or a darker yellow like #E4C00F for a more muted effect */
+    mix-blend-mode: multiply; /* or 'overlay', 'color-burn', 'hard-light' - experiment! */
+    opacity: 0.9; /* Adjust for intensity */
+}
+
+.bg-gold-overlay {
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(212, 175, 55, 0.15),
+      transparent 70%
+    ),
+    linear-gradient(135deg, rgba(255, 230, 150, 0.1), transparent 80%);
+  mix-blend-mode: overlay;
+  filter: blur(20px);
+}

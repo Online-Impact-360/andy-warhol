@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MotionButton from '@/components/MotionButton'
 import MotionInput from '@/components/MotionInput'
@@ -10,10 +10,6 @@ import MotionTextarea from '@/components/MotionTextarea'
 
 function InquirySection() {
   const ref = useRef<HTMLDivElement | null>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 0.5, 0.5, 0.3])
-  
   const [submitting, setSubmitting] = useState(false)
   const [values, setValues] = useState({
     fullName: '',
@@ -71,9 +67,21 @@ function InquirySection() {
 
   return (
     <section ref={ref} className="relative w-full bg-charcoal text-warm-white py-24 md:py-32 overflow-hidden overflow-x-hidden">
-      <motion.div className="absolute inset-0" style={{ y, opacity }}>
-        <Image src="/man_standing_sideways.png" alt="Warhol silhouette" fill className="object-cover object-center grayscale" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(12,12,12,1) 0%, rgba(12,12,12,0.9) 25%, rgba(12,12,12,0.6) 60%, rgba(12,12,12,0.2) 100%)' }} />
+      <motion.div
+        className="absolute inset-0"
+        // style={{ y, opacity }}
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 0.4, y: 0 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        viewport={{ once: true }}
+      >
+        <Image src="/man_standing_sideways.png" alt="Warhol silhouette" fill className="object-cover object-left grayscale" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut', delay: 0.6 }}
+          className="absolute inset-0 bg-linear-to-r from-black via-black/80 to-transparent"
+        />
       </motion.div>
 
       <div className="container relative">
@@ -85,7 +93,7 @@ function InquirySection() {
           className="max-w-3xl"
         >
           <div className="font-serif">
-            <motion.h2 
+            <motion.h2
               className="font-bold text-[36px] md:text-[44px] lg:text-[56px] leading-tight"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -99,25 +107,25 @@ function InquirySection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
-            variants={{ 
-              hidden: {}, 
-              show: { transition: { staggerChildren: 0.15 } } 
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p 
+            <motion.p
               className="mt-6 text-warm-white/90 text-[18px] md:text-[19px] leading-relaxed"
-              variants={{ 
-                hidden: { opacity: 0, y: 20 }, 
-                show: { opacity: 1, y: 0 } 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
               }}
             >
               Due to the confidential nature of this artwork, full provenance, documentation, and viewing arrangements are available exclusively to verified collectors, dealers, or representatives.
             </motion.p>
-            <motion.p 
+            <motion.p
               className="mt-4 text-warm-white/90 text-[18px] md:text-[19px] leading-relaxed"
-              variants={{ 
-                hidden: { opacity: 0, y: 20 }, 
-                show: { opacity: 1, y: 0 } 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
               }}
             >
               Please complete the form below to begin the private access process. You will receive a secure NDA for digital signature before viewing the complete provenance record.
@@ -137,24 +145,32 @@ function InquirySection() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
           className="mt-10 md:mt-12 max-w-4xl"
-          style={{ boxShadow: 'inset 0 0 60px rgba(212,175,55,0.08)' }}
+          style={{ boxShadow: 'inset 0 0 60px rgba(212,175,d55,0.08)' }}
         >
-          <motion.div 
+          <motion.div
             className="rounded-sm border-2 border-gold/90"
-            initial={{ borderColor: 'rgba(212,175,55,0.5)' }}
-            whileInView={{ borderColor: 'rgba(212,175,55,0.9)' }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            initial={{ opacity: 0, scale: 0.98, boxShadow: '0 0 0 rgba(212,175,55,0)' }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              boxShadow: [
+                '0 0 0 rgba(212,175,55,0)',
+                '0 0 30px rgba(212,175,55,0.2)',
+                '0 0 0 rgba(212,175,55,0)',
+              ],
+            }}
+            transition={{ duration: 2, ease: 'easeInOut' }}
+            viewport={{ once: true }}
           >
             <div className="p-6 md:p-8 space-y-6 bg-black/40">
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 gap-5"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
-                variants={{ 
-                  hidden: {}, 
-                  show: { transition: { staggerChildren: 0.08 } } 
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.08 } }
                 }}
               >
                 <motion.div variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}>
@@ -165,14 +181,14 @@ function InquirySection() {
                 </motion.div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 gap-5"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
-                variants={{ 
-                  hidden: {}, 
-                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } 
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
                 }}
               >
                 <motion.div variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}>
@@ -183,7 +199,7 @@ function InquirySection() {
                     <option className="bg-black" value="Representative">Representative</option>
                   </MotionSelect>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="grid grid-cols-1 sm:grid-cols-2 gap-5"
                   variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}
                 >
@@ -201,7 +217,7 @@ function InquirySection() {
                 <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} />
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="pt-2"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
