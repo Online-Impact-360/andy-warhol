@@ -3,7 +3,8 @@ import ProvenanceSection from "@/components/ProvenanceSection";
 import NarrativeSection from "@/components/NarrativeSection";
 import AboutArtistSection from "@/components/AboutArtistSection";
 import InquirySection from "@/components/InquirySection";
-import CloserLookSection from "@/components/CloserLookSection";
+// import CloserLookSection from "@/components/CloserLookSection";
+import VisualGallerySection from "@/components/VisualGallerySection";
 
 
 export default function Home() {
@@ -13,7 +14,8 @@ export default function Home() {
       <ProvenanceSection />
       <NarrativeSection />
       <AboutArtistSection />
-      <CloserLookSection />
+      <VisualGallerySection />
+      {/* <CloserLookSection /> */}
       <InquirySection />
     </>
   );

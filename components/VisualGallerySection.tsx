@@ -1,0 +1,137 @@
+'use client'
+
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
+
+const slides = [
+  { src: '/man-black-hood-looking-down.jpg', alt: 'Canvas texture under angled light', caption: 'Original silkscreen on canvas, circa 1970s.' },
+  { src: '/man_standing_sideways.png', alt: 'Signature close-up', caption: 'Authenticated signature in pencil, lower right.' },
+  { src: '/man-black-hood-looking-down.jpg', alt: 'Raking light detail', caption: 'Surface detail under raking light, highlighting texture and layering.' },
+  { src: '/man_standing_sideways.png', alt: 'Framing detail', caption: 'Edges of stretcher bars and frame junction detail.' },
+  { src: '/man-black-hood-looking-down.jpg', alt: 'Pigment and screen', caption: 'Silkscreen matrix revealing ink deposition and mesh pattern.' },
+  { src: '/man_standing_sideways.png', alt: 'Conservation view', caption: 'Archival condition review under studio lighting.' },
+]
+
+function VisualGallerySection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // We'll use the scroll progress relative to the section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+
+  // Horizontal translation mapping
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['0vw', `-${(slides.length - 1) * 100}vw`]
+    // ['0vw', `-430vw`]
+  )
+
+  // Dynamically calculate height: (slides.length - 1) * 100vh
+  const scrollLength = (slides.length - 1) * 100
+
+  return (
+    <section
+      className="w-full bg-black"
+    >
+      <div className='max-w-[1440px] mx-auto relative'>
+      {/* Header */}
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-start pointer-events-none">
+        <div className="px-6 pt-16">
+          <motion.div
+            className="font-serif text-white"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-tight">
+              A Closer Look
+            </h2>
+          </motion.div>
+          <motion.div
+            className="mt-3 h-px w-40 bg-linear-to-r from-yellow-600 to-transparent"
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+            style={{ transformOrigin: 'left' }}
+          />
+        </div>
+      </div>
+
+      <section
+        ref={sectionRef}
+        style={{
+          height: `${scrollLength}vh`,
+        }}
+      >
+        {/* Sticky container for horizontal scroll */}
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <motion.div
+            style={{ x }}
+            className="flex h-full items-center"
+          >
+          {slides.map((s, i) => (
+            <div
+              key={i}
+              className="relative w-full h-full shrink-0 flex items-center justify-center"
+            >
+              <div className="relative w-[80vw] h-[80vh] overflow-hidden rounded-md border border-white/10">
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  fill
+                  className="object-cover object-center"
+                  priority={i === 0}
+                />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />
+
+                {/* Caption */}
+                <motion.div
+                  className="absolute bottom-4 left-4 right-4 text-white text-sm md:text-base bg-black/40 px-4 py-2 rounded-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                >
+                  <span className="text-yellow-500 mr-2">•</span>
+                  {s.caption}
+                </motion.div>
+
+                {/* Counter */}
+                <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded border border-yellow-600/50">
+                  {i + 1} / {slides.length}
+                </div>
+              </div>
+            </div>
+          ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Progress bar */}
+      <motion.div
+        className="absolute bottom-6 left-0 right-0 z-20"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+      >
+        <div className="mx-auto px-6">
+          <div className="h-px w-full bg-white/10" />
+          <motion.div
+            style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+            className="h-[2px] bg-yellow-600"
+          />
+        </div>
+      </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default VisualGallerySection
