@@ -6,7 +6,7 @@ import MotionButton from "@/components/MotionButton"
 function HeroSection() {
     return (
         <section className="h-screen bg-charcoal overflow-x-hidden max-h-[1500px]">
-            <div className="max-w-[1440px] mx-auto relative h-full overflow-hidden p-2">
+            <div className="max-w-content mx-auto relative h-full overflow-hidden p-2">
                 {/* Brando Silkscreen with Duotone */}
                 <div className="absolute top-[5%] left-[5%] bottom-[5%] w-[90%] md:w-[75%] overflow-hidden">
                     <motion.div
@@ -30,9 +30,6 @@ function HeroSection() {
                             fill
                             priority
                             className="object-cover object-top"
-                            style={{
-                                filter: 'grayscale(100%) contrast(1.1)',
-                            }}
                         />
                         {/* Duotone overlay: #CDAE5A at 62% multiply */}
                         <div
@@ -73,7 +70,7 @@ function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                     >
-                        A rare private silkscreen of Marlon Brando emerging from decades of obscurity in the hands of Warhol's trusted inner circle.
+                        A rare private silkscreen of Marlon Brando emerging from decades of obscurity in the hands of Warhol&apos;s trusted inner circle.
                     </motion.p>
 
                     {/* CTAs - Side by side, 24px gap, raised 32px */}

@@ -5,7 +5,7 @@ import MotionButton from '@/components/MotionButton'
 function ProvenanceSection() {
     const ref = useRef<HTMLDivElement | null>(null)
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-    const yBg = useTransform(scrollYProgress, [0, 1], [15, -40])
+    // const yBg = useTransform(scrollYProgress, [0, 1], [15, -40])
     const timelineY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
 
@@ -26,7 +26,7 @@ function ProvenanceSection() {
                 }}
             />
             <div className="absolute inset-0 bg-black/35" />
-            <div className="max-w-[1440px] mx-auto relative z-10">
+            <div className="max-w-content mx-auto relative z-10">
                 <div className="container">
                     <div className="grid grid-cols-12 gap-8 md:gap-12 items-start">
                         <motion.div
@@ -73,7 +73,7 @@ function ProvenanceSection() {
                                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
                             >
                                 <motion.p variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
-                                    Acquired directly from Andy Warhol's legal counsel, Si Litvinoff, this silkscreen of Marlon Brando has remained in private hands for over four decades.
+                                    Acquired directly from Andy Warhol&apos;s legal counsel, Si Litvinoff, this silkscreen of Marlon Brando has remained in private hands for over four decades.
                                 </motion.p>
                                 <motion.p variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
                                     Accompanied by notarized documentation, payment records, and personal correspondence between Warhol and Litvinoff, the chain of custody is meticulously preserved and authenticated.
@@ -84,7 +84,7 @@ function ProvenanceSection() {
                             </motion.div>
 
                             <motion.div style={{ y: timelineY }} className="mt-12 pe-6   md:mt-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, ease: 'easeOut' }}>
-                                <div className="relative w-full h-px bg-gradient-to-r from-gold via-gold/80 to-gold/30">
+                                <div className="relative w-full h-px bg-linear-to-r from-gold via-gold/80 to-gold/30">
                                     {/* 1970s */}
                                     <div className="absolute left-1/5 top-4 -mt-1 transform -translate-y-1/2">
                                         <div className="flex flex-col items-center gap-2">

@@ -10,8 +10,8 @@ const articles = [
     source: "Reuters",
     snippet:
       "An Andy Warhol silkscreen of Marlon Brando, one of the late pop artist’s most famous Hollywood portraits, is expected to sell for $20 million when it hits the auction block.",
-    // link: "https://www.reuters.com/article/2012/09/05/idUSL2E8K53BO20120905",
-    image: "/man-black-hood-looking-down.jpg",
+    link: "https://www.reuters.com/article/lifestyle/warhol-silkscreen-of-brando-may-snag-20-million-christies-idUSBRE8840WJ/",
+    image: "/articles-imgs/reuters.jpg",
   },
   {
     title:
@@ -20,8 +20,8 @@ const articles = [
     source: "Reuters",
     snippet:
       "Two Andy Warhol paintings helped push Christie’s to a record-setting $853 million auction night, underscoring the market’s hunger for Pop Art icons.",
-    // link: "https://www.reuters.com/article/2014/11/13/idUSKCN0IX1VW20141113",
-    image: "/man_standing_sideways.png",
+    link: "https://www.reuters.com/article/lifestyle/two-warhols-fetch-153-million-christies-record-setting-art-auction-idUSKCN0IX09O/",
+    image: "/articles-imgs/reuters2.jpg",
   },
   {
     title:
@@ -30,8 +30,8 @@ const articles = [
     source: "The Guardian",
     snippet:
       "A 1964 portrait of Marilyn Monroe by Andy Warhol has become the most expensive 20th-century artwork ever sold at auction.",
-    // link: "https://www.theguardian.com/artanddesign/2022/may/10/andy-warhol-marilyn-monroe-auction",
-    image: "/man-black-hood-looking-down.jpg",
+    link: "https://www.theguardian.com/artanddesign/2022/may/09/andy-warhol-marilyn-monroe-portrait-auction",
+    image: "/articles-imgs/guardian.avif",
   },
   {
     title:
@@ -40,8 +40,8 @@ const articles = [
     source: "NY Post",
     snippet:
       "An early Warhol painting of Trump Tower, once turned down by Donald Trump, returns to auction—proof of Warhol’s continued cultural magnetism.",
-    // link: "https://nypost.com/2024/11/19/andy-warhols-painting-of-trump-tower-up-for-auction/",
-    image: "/man-black-hood-looking-down.jpg",
+    link: "https://nypost.com/2024/11/19/us-news/andy-warhols-painting-of-trump-tower-that-donald-trump-rejected-in-the-80s-up-for-auction/",
+    image: "/articles-imgs/nyPost.webp",
   },
   {
     title: "Andy Warhol’s Most Expensive Paintings – Andipa Gallery",
@@ -49,8 +49,8 @@ const articles = [
     source: "Andipa Gallery",
     snippet:
       "A curated list of Warhol’s top-selling works, highlighting the enduring demand and record-breaking values in the artist’s market.",
-    // link: "https://andipagallery.com/andy-warhol-most-expensive-paintings",
-    image: "/man_standing_sideways.png",
+    link: "https://andipagallery.com/blog/142-andy-warhol-s-most-expensive-paintings-as-sold-at-auction/",
+    image: "/articles-imgs/mariln.webp",
   },
 ]
 
@@ -67,11 +67,11 @@ const MarketMomentSection = () => {
         </h2>
 
         {/* Cards Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center">
           {articles.map((item, index) => (
             <motion.a
               key={index}
-              href='#'
+              href={item.link}
               target="_blank"
               rel="noopener noreferrer"
               className="group block bg-[#121212] hover:bg-[#1E1E1E] border border-[#1E1E1E] rounded-2xl transition-all duration-500 shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)]"

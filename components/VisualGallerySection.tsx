@@ -5,12 +5,12 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 
 const slides = [
-  { src: '/man-black-hood-looking-down.jpg', alt: 'Canvas texture under angled light', caption: 'Original silkscreen on canvas, circa 1970s.' },
-  { src: '/man_standing_sideways.png', alt: 'Signature close-up', caption: 'Authenticated signature in pencil, lower right.' },
-  { src: '/man-black-hood-looking-down.jpg', alt: 'Raking light detail', caption: 'Surface detail under raking light, highlighting texture and layering.' },
-  { src: '/man_standing_sideways.png', alt: 'Framing detail', caption: 'Edges of stretcher bars and frame junction detail.' },
-  { src: '/man-black-hood-looking-down.jpg', alt: 'Pigment and screen', caption: 'Silkscreen matrix revealing ink deposition and mesh pattern.' },
-  { src: '/man_standing_sideways.png', alt: 'Conservation view', caption: 'Archival condition review under studio lighting.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-1.JPG', alt: 'Canvas texture under angled light', caption: 'Original silkscreen on canvas, circa 1970s.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-2.JPG', alt: 'Signature close-up', caption: 'Authenticated signature in pencil, lower right.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-3.JPG', alt: 'Raking light detail', caption: 'Surface detail under raking light, highlighting texture and layering.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-4.JPG', alt: 'Framing detail', caption: 'Edges of stretcher bars and frame junction detail.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-5.JPG', alt: 'Pigment and screen', caption: 'Silkscreen matrix revealing ink deposition and mesh pattern.' },
+  // { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-6.JPG', alt: 'Conservation view', caption: 'Archival condition review under studio lighting.' },
 ]
 
 function VisualGallerySection() {
@@ -38,7 +38,7 @@ function VisualGallerySection() {
     <section
       className="w-full bg-black"
     >
-      <div className='max-w-[1440px] mx-auto relative'>
+      <div className='max-w-content mx-auto relative'>
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 flex items-start pointer-events-none">
           <div className="px-6 pt-16">

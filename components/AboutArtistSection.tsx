@@ -49,7 +49,7 @@ export default function AboutArtistSection() {
 
       {/* Marlon Section */}
       <div className="relative bg-black/60 backdrop-blur-sm py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-content mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -130,7 +130,7 @@ export default function AboutArtistSection() {
 
       {/* About Section */}
       <div className="relative py-32 px-8 bg-linear-to-b from-black/60 to-stone-900">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-content mx-auto">
           <motion.h2 
             className="text-6xl md:text-7xl font-serif font-bold mb-8 text-center"
             initial={{ opacity: 0, y: 30 }}

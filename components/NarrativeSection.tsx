@@ -23,7 +23,7 @@ function NarrativeSection() {
       {/* optional top gradient to blend from previous section */}
       <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-charcoal to-transparent pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+      <div className="max-w-content mx-auto px-6 md:px-12">
         <div className="grid grid-cols-12 gap-8 md:gap-14 items-start">
           {/* Left Text Column */}
           <div className="col-span-12 lg:col-span-5">
