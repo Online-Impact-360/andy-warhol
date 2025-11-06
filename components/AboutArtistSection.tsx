@@ -8,7 +8,7 @@ export default function AboutArtistSection() {
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-950 via-stone-900 to-black text-white overflow-x-hidden">
       {/* Hero Section */}
-      <div className="relative flex items-center justify-center px-8 py-16">
+      <div className="relative flex items-center justify-center px-8 py-16" style={{ background: 'linear-gradient(to bottom, #241515, #1A0F0F)' }}>
         {/* Background Image Overlay */}
         <motion.div 
           className="absolute inset-0 opacity-20"
@@ -25,17 +25,17 @@ export default function AboutArtistSection() {
         
         <div className="relative z-10 max-w-6xl w-full">
           <div className="text-center mb-20">
-            <motion.h1 
-              className="text-7xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tight mb-4"
+            <motion.h2 
+              className="font-didot text-[2.8rem] tracking-tight mb-3 text-offwhite"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              ANDY<br/>WARHOL
-            </motion.h1>
+              ANDY WARHOL
+            </motion.h2>
             <motion.p 
-              className="text-xl md:text-2xl font-light tracking-widest uppercase"
+              className="font-inter text-[0.9rem] tracking-[0.12em] uppercase text-offwhite/80"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -67,7 +67,7 @@ export default function AboutArtistSection() {
                 MARLON
               </motion.h2>
               <motion.p 
-                className="text-xl md:text-2xl font-light tracking-wide mb-8 pb-8 border-b border-amber-600/50"
+                className="text-xl md:text-2xl font-light tracking-wide mb-3"
                 initial={{ opacity: 0, scaleX: 0 }}
                 whileInView={{ opacity: 1, scaleX: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -76,8 +76,10 @@ export default function AboutArtistSection() {
               >
                 SILKSCREEN ON CANVAS, 1966
               </motion.p>
+              {/* Hairline rule: 1px height, 72px width */}
+              <div className="h-px w-[72px] bg-hair mb-8" />
               <motion.p 
-                className="text-lg leading-relaxed text-gray-300"
+                className="text-[1.05rem] leading-[1.75] text-gray-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -127,7 +129,7 @@ export default function AboutArtistSection() {
       </div>
 
       {/* About Section */}
-      <div className="relative py-24 px-8 bg-linear-to-b from-black/60 to-stone-900">
+      <div className="relative py-32 px-8 bg-linear-to-b from-black/60 to-stone-900">
         <div className="max-w-[1440px] mx-auto">
           <motion.h2 
             className="text-6xl md:text-7xl font-serif font-bold mb-8 text-center"
@@ -176,7 +178,7 @@ export default function AboutArtistSection() {
             transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
             className='flex items-center justify-center'
           >
-            <MotionButton variant="ghost">View Biography</MotionButton>
+            <MotionButton variant="secondary" className="h-14 tracking-[0.04em]">VIEW BIOGRAPHY</MotionButton>
           </motion.div>
         </div>
       </div>

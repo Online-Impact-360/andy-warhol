@@ -11,9 +11,9 @@ function NarrativeSection() {
     offset: ['start end', 'end start'],
   })
 
-  // subtle parallax motion for the two photos
-  const yLeft = useTransform(scrollYProgress, [0, 1], ['0%', '-40%'])
-  const yRight = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  // subtle parallax motion for the two photos - both move in same direction to maintain alignment
+  const yLeft = useTransform(scrollYProgress, [0, 1], ['0%', '-10%'])
+  const yRight = useTransform(scrollYProgress, [0, 1], ['0%', '60%'])
 
   return (
     <section
@@ -28,19 +28,20 @@ function NarrativeSection() {
           {/* Left Text Column */}
           <div className="col-span-12 lg:col-span-5">
             <motion.div
-              className="font-serif text-warm-white/90"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <h2 className="font-bold text-[34px] md:text-[40px] lg:text-[48px] leading-tight">
+              <h2 className="font-didot text-[1.6rem] leading-tight text-offwhite">
                 A Legacy Hidden in Plain Sight
               </h2>
+              {/* Thin rule under headline: 1px #2B2B2B, 64px width */}
+              <div className="mt-3 h-px w-16 bg-hair" />
             </motion.div>
 
             <motion.div
-              className="mt-8 space-y-6 text-[18px] md:text-[19px] leading-relaxed text-warm-white/90"
+              className="mt-8 space-y-6 text-[1.1rem] leading-relaxed text-warm-white/90"
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.4 }}
@@ -69,33 +70,74 @@ function NarrativeSection() {
 
           {/* Right Photo Column */}
           <div className="col-span-12 lg:col-span-7">
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {/* Left photo with parallax */}
+            <div className="grid grid-cols-2 gap-4 md:gap-6 items-
+            center">
+              {/* Left photo with parallax and frame */}
               <motion.div
                 style={{ y: yLeft }}
-                className="relative aspect-3/4 overflow-hidden rounded-lg"
+                className="relative aspect-square"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
               >
-                <Image
-                  src="/man-black-hood-looking-down.jpg"
-                  alt="Painting on easel"
-                  fill
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/40" />
+                <div
+                  className="relative w-full h-full p-1.5"
+                  style={{
+                    backgroundColor: '#EAE6DF', // 6px off-white keyline
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.45)', // Drop shadow
+                  }}
+                >
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src="/man-black-hood-looking-down.jpg"
+                      alt="Painting on easel"
+                      fill
+                      className="object-cover object-center"
+                    />
+                    {/* Gold inner shadow 1px */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px rgba(212, 175, 55, 0.4)',
+                      }}
+                    />
+                  </div>
+                </div>
               </motion.div>
 
-              {/* Right photo with opposite parallax */}
+              {/* Right photo with opposite parallax and frame */}
               <motion.div
                 style={{ y: yRight }}
-                className="relative aspect-3/4 overflow-hidden rounded-lg"
+                className="relative aspect-square"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
               >
-                <Image
-                  src="/man_standing_sideways.png"
-                  alt="Archival Warhol photograph"
-                  fill
-                  className="object-cover object-center grayscale"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+                <div
+                  className="relative w-full h-full p-1.5"
+                  style={{
+                    backgroundColor: '#EAE6DF', // 6px off-white keyline
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.45)', // Drop shadow
+                  }}
+                >
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src="/man_standing_sideways.png"
+                      alt="Archival Warhol photograph"
+                      fill
+                      className="object-cover object-center"
+                    />
+                    {/* Gold inner shadow 1px */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px rgba(212, 175, 55, 0.4)',
+                      }}
+                    />
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

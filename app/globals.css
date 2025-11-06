@@ -1,42 +1,157 @@
 @import "tailwindcss";
 
 @theme {
+  /* ===== COLOR PALETTE ===== */
+  --color-charcoal: #0B0B0B;
+  --color-panel: #101010;
+  --color-gold: #D8B66A;
+  --color-gold-hover: #C6A556;
+  --color-offwhite: #EAE6DF;
+  --color-oxblood: #241515;
+  --color-hair: #2B2B2B;
+
+  /* Legacy colors (backward compatibility) */
   --color-black: #0A0A0A;
-  --color-gold: #D4AF37;
   --color-warm-white: #F5F5F5;
   --color-silver: #C0C0C0;
-  --color-charcoal: #181818;
 
-  --font-serif: var(--font-heading), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  /* ===== FONT FAMILIES ===== */
+  /* Use as: font-didot, font-playfair, font-inter */
+  --font-family-didot: Didot, 'Libre Bodoni', serif;
+  --font-family-playfair: 'Playfair Display', serif;
+  --font-family-inter: Inter, system-ui, sans-serif;
+  
+  /* Legacy font variables */
+  --font-family-serif: var(--font-heading), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-family-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  /* ===== TYPOGRAPHY SCALE ===== */
+  /* Use as: text-h1, text-h2, text-h3, text-body, etc. */
+  --font-size-h1: 4.5rem;      /* 72px */
+  --font-size-h2: 2.8rem;      /* 44.8px */
+  --font-size-h3: 1.6rem;      /* 25.6px */
+  --font-size-body: 1.1rem;    /* 17.6px */
+  --font-size-small: 0.95rem;  /* 15.2px */
+  --font-size-caption: 0.85rem;/* 13.6px */
+
+  /* ===== LINE HEIGHTS ===== */
+  --line-height-tight: 1.05;
+  --line-height-snug: 1.1;
+  --line-height-relaxed: 1.65;
+
+  /* ===== SPACING ===== */
+  --spacing-section-desktop: 112px;
+  --spacing-section-tablet: 72px;
+  --spacing-section-mobile: 56px;
+  --spacing-gutter-desktop: 72px;
+  --spacing-gutter-tablet: 32px;
+  --spacing-gutter-mobile: 24px;
+
+  /* ===== LAYOUT ===== */
+  --max-width-page: 1200px;
+  --max-width-content: 1440px;
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-button: 8px;
+  --radius-card: 12px;
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 120ms;
+  --transition-medium: 400ms;
 }
 
 :root {
+  /* Responsive Spacing System */
+  --gutter: 72px;
+  --section: 112px;
+  
+  /* Transition Durations */
+  --transition-fast: 120ms;
+  --transition-medium: 400ms;
+  
+  /* Legacy variables */
   --max-content-width: 1440px;
   --rhythm-line-height: 1.5;
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
 }
 
-html, body {
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  :root {
+    --gutter: 32px;
+    --section: 72px;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 640px) {
+  :root {
+    --gutter: 24px;
+    --section: 56px;
+  }
+}
+
+body {
+  background: #0B0B0B;
+  color: #EAE6DF;
   line-height: var(--rhythm-line-height);
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
+html {
+  line-height: var(--rhythm-line-height);
+}
+
+/* Typography Hierarchy */
+h1 {
+  font-family: Didot, 'Libre Bodoni', serif;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-family: Didot, 'Libre Bodoni', serif;
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  font-family: Didot, 'Libre Bodoni', serif;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
 }
 
 button, a{
   cursor: pointer;
 }
 
-p, span, a, li, div {
+p {
+  font-family: 'Playfair Display', serif;
+    line-height: var(--line-height-body);
+  font-weight: 200;
+}
+
+span, a, li {
   font-family: var(--font-body);
   font-weight: 400;
 }
 
+/* Minimal Layout Utilities - Use Tailwind classes instead when possible */
 .container {
   max-width: var(--max-content-width);
   margin-left: auto;
@@ -116,4 +231,18 @@ p, span, a, li, div {
     linear-gradient(135deg, rgba(255, 230, 150, 0.1), transparent 80%);
   mix-blend-mode: overlay;
   filter: blur(20px);
+}
+
+/* Micro-interactions - Optional utility for scroll animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: scroll-reveal-in var(--transition-medium) ease-out forwards;
+}
+
+@keyframes scroll-reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
