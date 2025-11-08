@@ -11,8 +11,8 @@ export interface MotionTextareaProps extends HTMLMotionProps<"textarea"> {
 }
 
 const baseField =
-  "px-4 py-3 bg-transparent border border-warm-white/20 focus:border-gold outline-none text-warm-white placeholder-warm-white/40 w-full";
-const baseLabel = "text-sm uppercase tracking-wide text-warm-white/80";
+  "px-4 py-3 bg-transparent border border-hair rounded-md focus:border-gold outline-none text-warm-white placeholder-warm-white/40 w-full transition-colors";
+const baseLabel = "font-inter text-[0.95rem] text-white/80";
 
 const MotionTextarea = React.forwardRef<HTMLTextAreaElement, MotionTextareaProps>(
   ({ label, className = "", error, success, helperText, id, name, ...props }, ref) => {

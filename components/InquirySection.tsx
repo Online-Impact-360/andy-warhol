@@ -19,8 +19,10 @@ function InquirySection() {
     country: '',
     message: '',
   })
+  const [ndaAgreed, setNdaAgreed] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [sent, setSent] = useState(false)
+  const [showNdaModal, setShowNdaModal] = useState(false)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target
@@ -35,6 +37,7 @@ function InquirySection() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) er.email = 'Enter a valid email address'
     if (!values.role) er.role = 'Please select one'
     if (!values.message || values.message.trim().length < 10) er.message = 'Please add a short message (min 10 chars)'
+    if (!ndaAgreed) er.nda = 'You must agree to the NDA terms'
     return er
   }
 
@@ -48,21 +51,13 @@ function InquirySection() {
     }
     setSubmitting(true)
     try {
-      console.log(values)
-      // const res = await fetch('/api/inquiry', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(values),
-      // })
-      // if (!res.ok) throw new Error('Failed')
-
       const res = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
       let data: { success?: boolean; message?: string; errors?: Record<string, string> } | null = null
-      try { data = await res.json() } catch {}
+      try { data = await res.json() } catch { }
       if (!res.ok || !data?.success) {
         if (data?.errors) {
           setErrors((prev) => ({ ...prev, ...data.errors }))
@@ -75,6 +70,7 @@ function InquirySection() {
 
       setSent(true)
       setValues({ fullName: '', email: '', role: '', city: '', country: '', message: '' })
+      setNdaAgreed(false)
       setErrors({})
     } catch {
       setErrors((prev) => ({ ...prev, form: 'Something went wrong. Please try again.' }))
@@ -84,27 +80,28 @@ function InquirySection() {
   }
 
   return (
-    <section ref={ref} className="relative w-full bg-charcoal text-warm-white py-24 md:py-32 overflow-hidden overflow-x-hidden">
+    <section ref={ref} className="relative w-full bg-[#111] text-warm-white py-24 md:py-32 overflow-hidden">
+      {/* Desaturated portrait background on right with dark radial gradient */}
       <motion.div
-        className="absolute inset-0"
-        // style={{ y, opacity }}
-        initial={{ opacity: 0, y: 80 }}
-        whileInView={{ opacity: 0.4, y: 0 }}
+        className="absolute right-0 top-0 bottom-0 w-full h-full hidden md:block"
+        initial={{ opacity: 0, x: 80 }}
+        whileInView={{ opacity: 0.3, x: 0 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
         viewport={{ once: true }}
       >
-        <Image 
-          src="/man_standing_sideways.png" 
-          alt="Warhol silhouette" 
-          fill 
-          className="object-cover object-left grayscale"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: 'easeOut', delay: 0.6 }}
-          className="absolute inset-0 bg-linear-to-r from-black via-black/80 to-transparent"
-        />
+        <div className="grid grid-cols-2 w-full h-full">
+          <div className="col-span-1"></div>
+          <div className="col-span-2 md:col-span-1 relative">
+            <Image
+              src="/man_standing_sideways.png"
+              alt="Warhol silhouette"
+              fill
+              className="object-cover absolute right-0 top-10 grayscale w-full h-full"
+            />
+          </div>
+        </div>
+        {/* Dark radial gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(17,17,17,0.3)_0%,rgba(17,17,17,0.9)_70%,rgba(17,17,17,1)_100%)]"></div>
       </motion.div>
 
       <div className="container relative">
@@ -156,36 +153,34 @@ function InquirySection() {
           </motion.div>
         </motion.div>
 
-        <div aria-live="polite" className="mt-6 text-sm">
-          {sent ? <div className="text-emerald-400">Thank you. We have received your request.</div> : null}
-          {errors.form ? <div className="text-red-400">{errors.form}</div> : null}
-        </div>
-
-        <motion.form
-          onSubmit={onSubmit}
-          initial={{ opacity: 0, y: 30, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-          className="mt-10 md:mt-12 max-w-4xl"
-          style={{ boxShadow: 'inset 0 0 60px rgba(212,175,d55,0.08)' }}
-        >
+        {/* Success Message */}
+        {sent && (
           <motion.div
-            className="rounded-sm border-2 border-gold/90"
-            initial={{ opacity: 0, scale: 0.98, boxShadow: '0 0 0 rgba(212,175,55,0)' }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-              boxShadow: [
-                '0 0 0 rgba(212,175,55,0)',
-                '0 0 30px rgba(212,175,55,0.2)',
-                '0 0 0 rgba(212,175,55,0)',
-              ],
-            }}
-            transition={{ duration: 2, ease: 'easeInOut' }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 p-6 bg-emerald-900/20 border border-emerald-500/30 rounded-md max-w-3xl"
           >
-            <div className="p-6 md:p-8 space-y-6 bg-black/40">
+            <h3 className="font-inter text-emerald-400 text-lg font-semibold mb-2">Request Submitted Successfully</h3>
+            <p className="font-inter text-white/80 text-[0.95rem] mb-2">Thank you. We have received your request and an email confirmation has been sent.</p>
+            <p className="font-inter text-white/60 text-[0.85rem] italic">Provenance access link will be emailed upon NDA execution.</p>
+          </motion.div>
+        )}
+
+        {/* Form Error */}
+        {errors.form && (
+          <div className="mt-6 text-red-400 text-sm">{errors.form}</div>
+        )}
+
+        {!sent && (
+          <motion.form
+            onSubmit={onSubmit}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            className="mt-10 md:mt-12 max-w-3xl"
+          >
+            <div className="p-6 md:p-8 space-y-6 bg-[#1A1A1A] rounded-md border border-hair">
               <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 gap-5"
                 initial="hidden"
@@ -240,6 +235,39 @@ function InquirySection() {
                 <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} />
               </motion.div>
 
+              {/* NDA Checkbox */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 }}
+              >
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={ndaAgreed}
+                    onChange={(e) => {
+                      setNdaAgreed(e.target.checked)
+                      setErrors((er) => ({ ...er, nda: '' }))
+                    }}
+                    className="mt-1 w-4 h-4 rounded border-hair bg-transparent checked:bg-gold focus:ring-gold focus:ring-offset-0"
+                  />
+                  <span className="font-inter text-[0.9rem] text-white/80">
+                    I agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={() => setShowNdaModal(true)}
+                      className="text-gold hover:text-gold/80 underline transition-colors"
+                    >
+                      NDA terms
+                    </button>
+                    .
+                  </span>
+                </label>
+                {errors.nda && <p className="text-red-400 text-xs mt-1">{errors.nda}</p>}
+              </motion.div>
+
+              {/* Submit Button - 48px height, full width on mobile */}
               <motion.div
                 className="pt-2"
                 initial={{ opacity: 0, y: 15 }}
@@ -247,13 +275,37 @@ function InquirySection() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
               >
-                <MotionButton type="submit" variant="primary" disabled={submitting}>
+                <MotionButton type="submit" variant="primary" disabled={submitting} className="w-full md:w-auto h-12">
                   {submitting ? 'Submitting...' : 'Request Provenance Access'}
                 </MotionButton>
               </motion.div>
             </div>
-          </motion.div>
-        </motion.form>
+          </motion.form>
+        )}
+
+        {/* NDA Modal */}
+        {showNdaModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" onClick={() => setShowNdaModal(false)}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-[#1A1A1A] border border-gold/30 rounded-md p-8 max-w-2xl max-h-[80vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-didot text-2xl text-gold mb-4">Non-Disclosure Agreement</h3>
+              <div className="font-inter text-white/80 text-sm space-y-4 mb-6">
+                <p>This is a placeholder for the NDA terms and conditions.</p>
+                <p>The actual NDA document will be provided here or as a downloadable PDF.</p>
+              </div>
+              <button
+                onClick={() => setShowNdaModal(false)}
+                className="font-inter bg-gold text-black px-6 py-2 rounded-md hover:bg-gold/90 transition-colors"
+              >
+                Close
+              </button>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   )

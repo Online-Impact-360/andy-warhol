@@ -12,8 +12,8 @@ export interface MotionSelectProps extends HTMLMotionProps<"select"> {
 }
 
 const baseField =
-  "px-4 py-3 bg-transparent border border-warm-white/20 focus:border-gold outline-none text-warm-white w-full";
-const baseLabel = "text-sm uppercase tracking-wide text-warm-white/80";
+  "h-12 px-4 bg-transparent border border-hair rounded-md focus:border-gold outline-none text-warm-white w-full transition-colors";
+const baseLabel = "font-inter text-[0.95rem] text-white/80";
 
 const MotionSelect = React.forwardRef<HTMLSelectElement, MotionSelectProps>(
   ({ label, className = "", children, error, success, helperText, id, name, ...props }, ref) => {

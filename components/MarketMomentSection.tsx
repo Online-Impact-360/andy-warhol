@@ -57,7 +57,7 @@ const articles = [
 const MarketMomentSection = () => {
   return (
     <section className="bg-[#121212] text-white py-20 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-page mx-auto">
         {/* Accent line */}
         <div className="w-16 h-[2px] bg-gold mb-4"></div>
 
@@ -66,40 +66,53 @@ const MarketMomentSection = () => {
           Market Moment & Press Highlights
         </h2>
 
-        {/* Cards Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center">
+        {/* Cards Grid - 1-up mobile, 2-up tablet, 3-up desktop */}
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((item, index) => (
             <motion.a
               key={index}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block bg-[#121212] hover:bg-[#1E1E1E] border border-[#1E1E1E] rounded-2xl transition-all duration-500 shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)]"
+              className="group bg-[#1A1A1A] overflow-hidden transition-all duration-300 hover:translate-y-[-2px] shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] flex flex-col h-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="h-56 w-full relative">
+              {/* Gold hairline at top */}
+              <div className="h-px bg-gold"></div>
+
+              {/* Image with 16:10 aspect ratio and gradient overlay */}
+              <div className="relative w-full aspect-16/10 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   className="object-cover object-center"
                 />
+                {/* Dark gradient on bottom 40% */}
+                <div className="absolute inset-0 bg-linear-to-b from-transparent from-60% to-black/80"></div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-gold mb-2">
+              <div className="p-6 flex flex-col grow">
+                {/* Headline in Didot 1.25rem */}
+                <h3 className="font-didot text-[1.25rem] leading-tight text-warm-white mb-3 line-clamp-3">
                   {item.title}
                 </h3>
-                <p className="text-sm text-warm-white/80 mb-2">
+                
+                {/* Source/date in Inter 0.85rem 70% white */}
+                <p className="font-inter text-[0.85rem] text-white/70 mb-4">
                   {item.source} · {item.date}
                 </p>
-                <p className="text-sm text-warm-white/70 mb-4 leading-relaxed">
+                
+                {/* Snippet */}
+                <p className="font-inter text-[0.9rem] text-white/60 mb-4 leading-relaxed line-clamp-3 grow">
                   {item.snippet}
                 </p>
-                <span className="text-gold text-sm underline underline-offset-4 group-hover:text-warm-white transition-colors">
+                
+                {/* Read more link */}
+                <span className="font-inter text-gold text-[0.85rem] group-hover:text-warm-white transition-colors">
                   Read full article →
                 </span>
               </div>
@@ -110,7 +123,7 @@ const MarketMomentSection = () => {
         {/* Bottom note */}
         <p className="text-center text-warm-white/70 text-sm mt-16 max-w-3xl mx-auto leading-relaxed">
           Selected press coverage demonstrating sustained market demand for
-          Warhol’s Brando series.
+          Warhol&apos;s Brando series.
         </p>
       </div>
     </section>
