@@ -5,12 +5,11 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 
 const slides = [
-  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-1.JPG', alt: 'Canvas texture under angled light', caption: 'Original silkscreen on canvas, circa 1970s.' },
-  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-2.JPG', alt: 'Signature close-up', caption: 'Authenticated signature in pencil, lower right.' },
-  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-3.JPG', alt: 'Raking light detail', caption: 'Surface detail under raking light, highlighting texture and layering.' },
-  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-4.JPG', alt: 'Framing detail', caption: 'Edges of stretcher bars and frame junction detail.' },
-  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-5.JPG', alt: 'Pigment and screen', caption: 'Silkscreen matrix revealing ink deposition and mesh pattern.' },
-  // { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-6.JPG', alt: 'Conservation view', caption: 'Archival condition review under studio lighting.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-1.jpg', alt: 'Canvas texture under angled light', caption: 'Original silkscreen on canvas, circa 1970s.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-2.jpg', alt: 'Signature close-up', caption: 'Authenticated signature in pencil, lower right.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-3.jpg', alt: 'Raking light detail', caption: 'Surface detail under raking light, highlighting texture and layering.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-4.jpg', alt: 'Framing detail', caption: 'Edges of stretcher bars and frame junction detail.' },
+  { src: '/gallery-imgs/Andy-warhol-Marlon-Brando-Silkscreen-5.jpg', alt: 'Pigment and screen', caption: 'Silkscreen matrix revealing ink deposition and mesh pattern.' },
 ]
 
 function VisualGallerySection() {
