@@ -34,11 +34,11 @@ const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
         ? {
             whileHover: {
               scale: 1.02,
-            background: "linear-gradient(135deg, #C6A556 0%, #D0AB46 50%, #B88A30 100%)", // Darker gradient on hover
-            boxShadow: "inset 0 0 20px rgba(255, 255, 255, 0.12)",
+              background: "linear-gradient(135deg, #a9883f 0%, #b7954b 50%, #8f6f2e 100%)",
+              boxShadow: "inset 0 0 20px rgba(255, 255, 255, 0.12)",
             },
-          whileTap: { scale: 0.98 },
-        }
+            whileTap: { scale: 0.98 },
+          }
         : variant === "secondary"
           ? {
             whileHover: {
@@ -62,8 +62,8 @@ const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
         style={
           variant === "primary"
             ? {
-              background: "linear-gradient(135deg, #D0AB46 0%, #E3C859 50%, #CA9A39 100%)",
-            }
+                background: "linear-gradient(135deg, #b7954b 0%, #d1b068 50%, #8f6f2e 100%)",
+              }
             : undefined
         }
         initial={{ opacity: 0, y: 8 }}

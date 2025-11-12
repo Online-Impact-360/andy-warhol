@@ -1,22 +1,22 @@
 'use client'
 import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import MotionButton from '@/components/MotionButton'
 function ProvenanceSection() {
     const ref = useRef<HTMLDivElement | null>(null)
-    const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+    // const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
     // const yBg = useTransform(scrollYProgress, [0, 1], [15, -40])
-    const timelineY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+    // const timelineY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
 
     return (
         <section
             ref={ref}
-            className="relative w-full text-[#F2F2F2] bg-black py-24 md:py-32 overflow-hidden"
+            className="relative w-full text-[#F2F2F2] bg-black py-24 md:py-32 overflow-hidden section"
         >
             {/* Background document with blur and dark overlay */}
             <div
-                className="absolute inset-0 opacity-35"
+                className="absolute inset-0"
                 style={{
                     backgroundImage: 'url(/doc-background.jpg)',
                     backgroundPosition: 'right top',
@@ -37,15 +37,15 @@ function ProvenanceSection() {
                             transition={{ duration: 0.6, ease: 'easeOut' }}
                         >
                             {/* Title: THE PROVENANCE */}
-                            <motion.div
+                            <motion.h2
                                 className="overflow-hidden"
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.3 }}
                                 transition={{ duration: 0.5, ease: 'easeOut' }}
                             >
-                                <h2 className="font-didot text-[2.8rem] leading-snug uppercase tracking-[0.05em] text-offwhite">THE PROVENANCE</h2>
-                            </motion.div>
+                                <span className="text-[2.8rem] leading-snug uppercase tracking-[0.05em] text-offwhite">THE PROVENANCE</span>
+                            </motion.h2>
 
                             <motion.div
                                 className="mt-5 h-px w-48 relative overflow-hidden"
@@ -65,7 +65,8 @@ function ProvenanceSection() {
                                 style={{
                                     color: '#EAE6DF',
                                     lineHeight: '1.8',
-                                    letterSpacing: '0.04em'
+                                    letterSpacing: '0.04em',
+                                    maxWidth: '65ch'
                                 }}
                                 initial="hidden"
                                 whileInView="show"
@@ -83,37 +84,22 @@ function ProvenanceSection() {
                                 </motion.p>
                             </motion.div>
 
-                            <motion.div style={{ y: timelineY }} className="mt-12 pe-6   md:mt-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, ease: 'easeOut' }}>
-                                <div className="relative w-full h-px bg-linear-to-r from-gold via-gold/80 to-gold/30">
-                                    {/* 1970s */}
-                                    <div className="absolute left-1/5 top-4 -mt-1 transform -translate-y-1/2">
-                                        <div className="flex flex-col items-center gap-2">
-                                            <div className="h-2 w-2 rounded-full bg-gold shadow-[0_0_12px_rgba(212,175,55,0.55)]" />
-                                            <span className="text-xs tracking-wider" style={{ fontVariant: 'small-caps' }}>
-                                                1970s
-                                            </span>
-                                        </div>
-                                    </div>
-                                    {/* 1980s */}
-                                    <div className="absolute left-4/7 top-4 -mt-1 transform -translate-x-1/2 -translate-y-1/2">
-                                        <div className="flex flex-col items-center gap-2">
-                                            <div className="h-2 w-2 rounded-full bg-gold shadow-[0_0_12px_rgba(212,175,55,0.55)]" />
-                                            <span className="text-xs tracking-wider" style={{ fontVariant: 'small-caps' }}>
-                                                1980s
-                                            </span>
-                                        </div>
-                                    </div>
-                                    {/* Present */}
-                                    <div className="absolute -right-6  top-4 -mt-1 transform -translate-y-1/2">
-                                        <div className="flex flex-col items-center gap-2">
-                                            <div className="h-2 w-2 rounded-full bg-gold shadow-[0_0_12px_rgba(212,175,55,0.55)]" />
-                                            <span className="text-xs tracking-wider" style={{ fontVariant: 'small-caps' }}>
-                                                Present
-                                            </span>
-                                        </div>
-                                    </div>
+                            <div className="timeline mt-12 pe-6 md:mt-16">
+                                <div className="flex items-center gap-4">
+                                    <div className="dot"></div>
+                                    <span className="text-xs tracking-wider small-caps">1970s</span>
                                 </div>
-                            </motion.div>
+                                <div className="rule"></div>
+                                <div className="flex items-center gap-4">
+                                    <div className="dot"></div>
+                                    <span className="text-xs tracking-wider small-caps">1980s</span>
+                                </div>
+                                <div className="rule"></div>
+                                <div className="flex items-center gap-4">
+                                    <div className="dot"></div>
+                                    <span className="text-xs tracking-wider small-caps">Present</span>
+                                </div>
+                            </div>
 
                             <motion.div className="mt-10 flex justify-start " viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, ease: 'easeOut', delay: 0.05 }}>
                                 <MotionButton variant="primary" className=" ">REQUEST FULL PROVENANCE (NDA REQUIRED)</MotionButton>

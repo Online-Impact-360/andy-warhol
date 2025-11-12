@@ -23,6 +23,7 @@ function InquirySection() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [sent, setSent] = useState(false)
   const [showNdaModal, setShowNdaModal] = useState(false)
+  const [showToast, setShowToast] = useState(false)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target
@@ -69,6 +70,8 @@ function InquirySection() {
       }
 
       setSent(true)
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 4000)
       setValues({ fullName: '', email: '', role: '', city: '', country: '', message: '' })
       setNdaAgreed(false)
       setErrors({})
@@ -105,6 +108,18 @@ function InquirySection() {
       </motion.div>
 
       <div className="container relative">
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            role="status"
+            aria-live="polite"
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gold text-charcoal px-4 py-2 rounded-md shadow"
+          >
+            Request submitted. Check your email for the NDA link.
+          </motion.div>
+        )}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +129,7 @@ function InquirySection() {
         >
           <div className="font-serif">
             <motion.h2
-              className="font-bold text-[36px] md:text-[44px] lg:text-[56px] leading-tight"
+              className="font-medium text-[42px] md:text-[48px] leading-[1.1]"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.35 }}
@@ -168,7 +183,7 @@ function InquirySection() {
 
         {/* Form Error */}
         {errors.form && (
-          <div className="mt-6 text-red-400 text-sm">{errors.form}</div>
+          <div className="mt-6 text-red-400 text-sm" role="status" aria-live="polite">{errors.form}</div>
         )}
 
         {!sent && (
@@ -178,11 +193,11 @@ function InquirySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-            className="mt-10 md:mt-12 max-w-3xl"
+            className="mt-10 md:mt-12 max-w-3xl inquiry-form"
           >
-            <div className="p-6 md:p-8 space-y-6 bg-[#1A1A1A] rounded-md border border-hair">
+            <div className="p-6 md:p-8 space-y-7 bg-[#1A1A1A] rounded-none border border-line">
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-5"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
@@ -192,15 +207,15 @@ function InquirySection() {
                 }}
               >
                 <motion.div variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}>
-                  <MotionInput id="fullName" name="fullName" value={values.fullName} onChange={handleChange} label="Full Name" type="text" placeholder="Your full name" error={errors.fullName} />
+                  <MotionInput id="fullName" name="fullName" value={values.fullName} onChange={handleChange} label="Full Name" type="text" placeholder="Your full name" error={errors.fullName} className="rounded-none border-line focus:border-gold text-[16px]" />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}>
-                  <MotionInput id="email" name="email" value={values.email} onChange={handleChange} label="Email Address" type="email" placeholder="you@example.com" error={errors.email} />
+                  <MotionInput id="email" name="email" value={values.email} onChange={handleChange} label="Email Address" type="email" placeholder="you@example.com" error={errors.email} className="rounded-none border-line focus:border-gold text-[16px]" />
                 </motion.div>
               </motion.div>
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-5"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
@@ -210,7 +225,7 @@ function InquirySection() {
                 }}
               >
                 <motion.div variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}>
-                  <MotionSelect id="role" name="role" value={values.role} onChange={handleChange} label="Collector / Dealer / Representative" error={errors.role}>
+                  <MotionSelect id="role" name="role" value={values.role} onChange={handleChange} label="Collector / Dealer / Representative" error={errors.role} className="rounded-none border-line focus:border-gold text-[16px]">
                     <option className="bg-black" value="">Select one</option>
                     <option className="bg-black" value="Collector">Collector</option>
                     <option className="bg-black" value="Dealer">Dealer</option>
@@ -221,8 +236,8 @@ function InquirySection() {
                   className="grid grid-cols-1 sm:grid-cols-2 gap-5"
                   variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}
                 >
-                  <MotionInput id="city" name="city" value={values.city} onChange={handleChange} label="City" type="text" placeholder="City" />
-                  <MotionInput id="country" name="country" value={values.country} onChange={handleChange} label="Country" type="text" placeholder="Country" />
+                  <MotionInput id="city" name="city" value={values.city} onChange={handleChange} label="City" type="text" placeholder="City" className="rounded-none border-line focus:border-gold text-[16px]" />
+                  <MotionInput id="country" name="country" value={values.country} onChange={handleChange} label="Country" type="text" placeholder="Country" className="rounded-none border-line focus:border-gold text-[16px]" />
                 </motion.div>
               </motion.div>
 
@@ -231,8 +246,9 @@ function InquirySection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                className="md:mt-1"
               >
-                <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} />
+                <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} className="rounded-none border-line focus:border-gold text-[16px]" />
               </motion.div>
 
               {/* NDA Checkbox */}
@@ -250,14 +266,14 @@ function InquirySection() {
                       setNdaAgreed(e.target.checked)
                       setErrors((er) => ({ ...er, nda: '' }))
                     }}
-                    className="mt-1 w-4 h-4 rounded border-hair bg-transparent checked:bg-gold focus:ring-gold focus:ring-offset-0"
+                    className="mt-1 w-4 h-4 rounded-none border-line bg-transparent checked:bg-gold focus:ring-gold focus:ring-offset-0"
                   />
                   <span className="font-inter text-[0.9rem] text-white/80">
                     I agree to the{' '}
                     <button
                       type="button"
                       onClick={() => setShowNdaModal(true)}
-                      className="text-gold hover:text-gold/80 underline transition-colors"
+                      className="text-gold hover:text-gold/80 underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
                     >
                       NDA terms
                     </button>
@@ -269,13 +285,13 @@ function InquirySection() {
 
               {/* Submit Button - 48px height, full width on mobile */}
               <motion.div
-                className="pt-2"
+                className="pt-3"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
               >
-                <MotionButton type="submit" variant="primary" disabled={submitting} className="w-full md:w-auto h-12">
+                <MotionButton type="submit" variant="primary" disabled={submitting} className="btn-primary w-full md:w-auto">
                   {submitting ? 'Submitting...' : 'Request Provenance Access'}
                 </MotionButton>
               </motion.div>

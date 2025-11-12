@@ -24,20 +24,27 @@ function NarrativeSection() {
       <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-charcoal to-transparent pointer-events-none" />
 
       <div className="max-w-content mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-12 gap-8 md:gap-14 items-start">
+        <div className="grid grid-cols-12 gap-10 md:gap-14 items-start">
           {/* Left Text Column */}
           <div className="col-span-12 lg:col-span-5">
             <motion.div
+              className="relative"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <h2 className="font-didot text-[1.6rem] leading-tight text-offwhite">
+              <div
+                className="absolute -inset-x-3 -inset-y-2 rounded-[2px] pointer-events-none blur-2xl"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(212, 180, 105, 0.3), rgba(212, 180, 105, 0))',
+                }}
+              />
+              <h2 className="text-[1.6rem] leading-tight text-offwhite relative">
                 A Legacy Hidden in Plain Sight
               </h2>
               {/* Thin rule under headline: 1px #2B2B2B, 64px width */}
-              <div className="mt-3 h-px w-16 bg-hair" />
+              <div className="mt-3 h-px w-16 bg-hair relative" />
             </motion.div>
 
             <motion.div
@@ -82,15 +89,11 @@ function NarrativeSection() {
                 transition={{ duration: 0.7, ease: 'easeOut' }}
               >
                 <div
-                  className="relative w-full h-full p-1.5"
-                  style={{
-                    backgroundColor: '#EAE6DF', // 6px off-white keyline
-                    boxShadow: '0 12px 40px rgba(0,0,0,0.45)', // Drop shadow
-                  }}
+                  className="relative w-full h-full p-1.5 frame-gold bg-offwhite"
                 >
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
-                      src="/man-black-hood-looking-down.jpg"
+                      src="/Andy-Warhol-Marlon-Brando-2.jpg"
                       alt="Painting on easel"
                       fill
                       className="object-cover object-center"
@@ -124,7 +127,7 @@ function NarrativeSection() {
                 >
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
-                      src="/man_standing_sideways.png"
+                      src="/Andy-Warhol-Marlon-Brando-1.jpg"
                       alt="Archival Warhol photograph"
                       fill
                       className="object-cover object-center"

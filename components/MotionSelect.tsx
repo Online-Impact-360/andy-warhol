@@ -12,8 +12,8 @@ export interface MotionSelectProps extends HTMLMotionProps<"select"> {
 }
 
 const baseField =
-  "h-12 px-4 bg-transparent border border-hair rounded-md focus:border-gold outline-none text-warm-white w-full transition-colors";
-const baseLabel = "font-inter text-[0.95rem] text-white/80";
+  "h-12 px-4 bg-transparent border border-line rounded-none focus:border-gold outline-none text-warm-white text-[16px] w-full transition-colors";
+const baseLabel = "font-inter text-[14px] text-white/60";
 
 const MotionSelect = React.forwardRef<HTMLSelectElement, MotionSelectProps>(
   ({ label, className = "", children, error, success, helperText, id, name, ...props }, ref) => {
@@ -38,10 +38,17 @@ const MotionSelect = React.forwardRef<HTMLSelectElement, MotionSelectProps>(
           {children}
         </motion.select>
         {(error || success || helperText) ? (
-          <span id={describedBy} className={[
-            "text-xs",
-            error ? "text-red-400" : success ? "text-emerald-400" : "text-warm-white/60"
-          ].join(" ")}>{error || success || helperText}</span>
+          <span
+            id={describedBy}
+            role="status"
+            aria-live="polite"
+            className={[
+              "text-xs",
+              error ? "text-red-400" : success ? "text-emerald-400" : "text-warm-white/60"
+            ].join(" ")}
+          >
+            {error || success || helperText}
+          </span>
         ) : null}
       </label>
     );

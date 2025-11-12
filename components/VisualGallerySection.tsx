@@ -37,7 +37,7 @@ function VisualGallerySection() {
     <section
       className="w-full bg-black"
     >
-      <div className='max-w-content mx-auto relative'>
+      <div className="wrap-wide mx-auto relative">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 flex items-start pointer-events-none">
           <div className="px-6 pt-16">
@@ -66,6 +66,8 @@ function VisualGallerySection() {
           className="absolute inset-0 pointer-events-none bg-linear-to-b from-black/20 via-transparent to-black/20"
           style={{ opacity: useTransform(scrollYProgress, [0, 1], [0.3, 0.7]) }}
         />
+        {/* <div className="pointer-events-none absolute top-10 left-0 right-0 h-[2px] bg-[rgba(212,180,105,.35)] z-10" />
+        <div className="pointer-events-none absolute bottom-12 left-0 right-0 h-[2px] bg-[rgba(212,180,105,.35)] z-10" /> */}
 
         <section
           ref={sectionRef}
@@ -80,9 +82,9 @@ function VisualGallerySection() {
               className="flex h-full items-center"
             >
               {slides.map((s, i) => (
-                <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center">
+                <div key={i} className="relative w-full h-full shrink-0 flex flex-col items-center justify-center">
                   <motion.div
-                    className="relative w-[80vw] h-[80vh] overflow-hidden rounded-md border border-white/10"
+                    className="relative w-[80vw] h-[80vh] overflow-hidden rounded-none border-2 border-[rgba(212,180,105,.35)]"
                     initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
                     whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                     viewport={{ once: false, amount: 0.5 }}
@@ -97,16 +99,15 @@ function VisualGallerySection() {
                     />
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />
 
-                    <motion.div
-                      className="absolute bottom-4 left-4 right-4 text-white text-sm md:text-base bg-black/40 px-4 py-2 rounded-md"
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false, amount: 0.6 }}
-                      transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-                    >
-                      <span className="text-yellow-500 mr-2">•</span>
-                      {s.caption}
-                    </motion.div>
+                  </motion.div>
+                  <motion.div
+                    className="mt-3 text-sm text-ink-muted"
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.6 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
+                  >
+                    {s.caption}
                   </motion.div>
                 </div>
               ))}

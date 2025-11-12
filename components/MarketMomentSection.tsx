@@ -56,25 +56,28 @@ const articles = [
 
 const MarketMomentSection = () => {
   return (
-    <section className="bg-[#121212] text-white py-20 px-6 md:px-16">
+    <section className="bg-bg-soft text-white pt-28 md:pt-32 pb-20 px-6 md:px-16">
       <div className="max-w-page mx-auto">
         {/* Accent line */}
         <div className="w-16 h-[2px] bg-gold mb-4"></div>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-serif text-warm-white mb-12">
+        <h2 className="text-3xl md:text-4xl font-serif text-warm-white mb-2">
           Market Moment & Press Highlights
         </h2>
+        <p className="text-warm-white/80 text-sm mb-12">
+          Selected news demonstrating Warhol demand and market velocity.
+        </p>
 
         {/* Cards Grid - 1-up mobile, 2-up tablet, 3-up desktop */}
-        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-13 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((item, index) => (
             <motion.a
               key={index}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-[#1A1A1A] overflow-hidden transition-all duration-300 hover:translate-y-[-2px] shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] flex flex-col h-full"
+              className="group bg-[#1A1A1A] overflow-hidden transition-all duration-300 hover:translate-y-[-2px] shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -83,7 +86,7 @@ const MarketMomentSection = () => {
               {/* Gold hairline at top */}
               <div className="h-px bg-gold"></div>
 
-              {/* Image with 16:10 aspect ratio and gradient overlay */}
+              {/* Image with 16:10 aspect ratio, warm grading and gradient overlay */}
               <div className="relative w-full aspect-16/10 overflow-hidden">
                 <Image
                   src={item.image}
@@ -91,28 +94,30 @@ const MarketMomentSection = () => {
                   fill
                   className="object-cover object-center"
                 />
+                {/* Uniform warm grade overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-[rgba(212,175,55,0.10)] mix-blend-overlay"></div>
                 {/* Dark gradient on bottom 40% */}
                 <div className="absolute inset-0 bg-linear-to-b from-transparent from-60% to-black/80"></div>
               </div>
 
               <div className="p-6 flex flex-col grow">
-                {/* Headline in Didot 1.25rem */}
-                <h3 className="font-didot text-[1.25rem] leading-tight text-warm-white mb-3 line-clamp-3">
+                {/* Headline in Didot 18px with hover underline */}
+                <h3 className="text-[1.125rem] leading-tight text-warm-white mb-3 line-clamp-3 group-hover:underline underline-offset-4 decoration-gold">
                   {item.title}
                 </h3>
                 
                 {/* Source/date in Inter 0.85rem 70% white */}
-                <p className="font-inter text-[0.85rem] text-white/70 mb-4">
+                <p className="text-[0.85rem] text-white/80 mb-4">
                   {item.source} · {item.date}
                 </p>
                 
                 {/* Snippet */}
-                <p className="font-inter text-[0.9rem] text-white/60 mb-4 leading-relaxed line-clamp-3 grow">
+                <p className="text-[0.9rem] text-white/80 mb-4 leading-relaxed line-clamp-3 grow">
                   {item.snippet}
                 </p>
                 
                 {/* Read more link */}
-                <span className="font-inter text-gold text-[0.85rem] group-hover:text-warm-white transition-colors">
+                <span className="text-gold text-[0.85rem] group-hover:text-warm-white transition-colors">
                   Read full article →
                 </span>
               </div>
@@ -121,7 +126,7 @@ const MarketMomentSection = () => {
         </div>
 
         {/* Bottom note */}
-        <p className="text-center text-warm-white/70 text-sm mt-16 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-center text-warm-white/80 text-sm mt-16! leading-relaxed">
           Selected press coverage demonstrating sustained market demand for
           Warhol&apos;s Brando series.
         </p>

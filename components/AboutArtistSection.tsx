@@ -3,37 +3,36 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import MotionButton from './MotionButton';
+import { Lora } from 'next/font/google';
+
+const lora = Lora({ subsets: ['latin'], weight: ['400'] });
 
 export default function AboutArtistSection() {
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-950 via-stone-900 to-black text-white overflow-x-hidden">
       {/* Hero Section */}
-      <div className="relative flex items-center justify-center px-8 py-10 md:py-24" style={{ background: 'linear-gradient(to bottom, #241515, #1A0F0F)' }}>
+      <div className="relative flex items-center justify-center px-8 py-10 md:py-20" style={{ background: 'linear-gradient(to bottom, #241515, #1A0F0F)' }}>
         {/* Background Image Overlay */}
         <motion.div
           className="absolute right-0 top-0 w-full h-full overflow-hidden z-0"
           initial={{ scale: 1.1, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.2 }}
+          whileInView={{ scale: 1, opacity: 0.8 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
         >
-          <div className="w-full h-full grid grid-cols-2">
-            {/* empty div for styling purposes */}
-            <div className="col-span-1 hidden md:block"></div>
-            <div className="col-span-2 md:col-span-1 relative">
-            <Image
-              src="/man_standing_sideways.png"
-              alt="Andy Warhol silhouette"
-              fill
-              className="object-cover opacity-75 absolute right-0 top-0 z-10"
-              priority
+          <div className="w-full h-full relative">
+              <Image
+                src="/Andy.jpg"
+                alt="Andy Warhol silhouette"
+                fill
+                className="object-cover object-center absolute right-0 top-0 z-10"
+                priority
               />
-              </div>
           </div>
         </motion.div>
 
         <div className="relative z-10 max-w-6xl w-full">
-          <div className="text-center md:text-left mb-0 md:mb-20">
+          <div className="text-center md:text-left">
             <motion.h2
               className="font-didot text-[64px] sm:text-[80px] md:text-[96px] lg:text-[120px]! tracking-tight text-offwhite"
               initial={{ opacity: 0, y: 40 }}
@@ -76,7 +75,7 @@ export default function AboutArtistSection() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
               <motion.h2
-                className="text-6xl md:text-7xl font-serif font-bold mb-4"
+                className="text-6xl! md:text-7xl! font-serif font-bold mb-4"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -84,6 +83,9 @@ export default function AboutArtistSection() {
               >
                 MARLON
               </motion.h2>
+              <div
+                className="h-px w-[72px] mb-6 bg-gold opacity-30"
+              />
               <motion.p
                 className="text-xl md:text-2xl font-light tracking-wide mb-3"
                 initial={{ opacity: 0, scaleX: 0 }}
@@ -94,8 +96,6 @@ export default function AboutArtistSection() {
               >
                 SILKSCREEN ON CANVAS, 1966
               </motion.p>
-              {/* Hairline rule: 1px height, 72px width */}
-              <div className="h-px w-[72px] bg-hair mb-8" />
               <motion.p
                 className="text-[1.05rem] leading-[1.75] text-gray-300"
                 initial={{ opacity: 0, y: 20 }}
@@ -129,16 +129,16 @@ export default function AboutArtistSection() {
                   transition={{ duration: 0.7, ease: 'easeOut', delay: 0.25 }}
                   whileHover={{ scale: 1.02, rotate: 1 }}
                 >
-                  <Image
-                    src="/man-black-hood-looking-down.jpg"
-                    width={600}
-                    height={600}
-                    alt="Marlon Brando Pop Art"
-                    className="relative rounded-lg shadow-2xl border-8 border-white/90 w-full max-w-md"
-                    style={{
-                      filter: 'contrast(1.2) saturate(1.3)'
-                    }}
-                  />
+                  <div className="frame-gold bg-[#0e0e0e] p-3 w-full max-w-md">
+                    <Image
+                      src="/marlon1.jpg"
+                      width={600}
+                      height={600}
+                      alt="Marlon Brando Pop Art"
+                      className="w-full h-auto object-cover"
+                      style={{ filter: 'contrast(1.2) saturate(1.3)' }}
+                    />
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
@@ -180,7 +180,7 @@ export default function AboutArtistSection() {
           </motion.h2>
 
           <motion.p
-            className="text-lg md:text-xl leading-relaxed text-gray-300 mb-12 text-center max-w-[1000px] mx-auto"
+            className={`${lora.className} text-lg md:text-xl leading-relaxed text-gray-300 mb-12 text-center max-w-[1000px] mx-auto`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}

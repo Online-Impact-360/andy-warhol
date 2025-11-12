@@ -11,8 +11,8 @@ export interface MotionTextareaProps extends HTMLMotionProps<"textarea"> {
 }
 
 const baseField =
-  "px-4 py-3 bg-transparent border border-hair rounded-md focus:border-gold outline-none text-warm-white placeholder-warm-white/40 w-full transition-colors";
-const baseLabel = "font-inter text-[0.95rem] text-white/80";
+  "px-4 py-3 bg-transparent border border-line rounded-none focus:border-gold outline-none text-warm-white text-[16px] placeholder-warm-white/40 w-full transition-colors";
+const baseLabel = "font-inter text-[14px] text-white/60";
 
 const MotionTextarea = React.forwardRef<HTMLTextAreaElement, MotionTextareaProps>(
   ({ label, className = "", error, success, helperText, id, name, ...props }, ref) => {
@@ -35,10 +35,17 @@ const MotionTextarea = React.forwardRef<HTMLTextAreaElement, MotionTextareaProps
           {...props}
         />
         {(error || success || helperText) ? (
-          <span id={describedBy} className={[
-            "text-xs",
-            error ? "text-red-400" : success ? "text-emerald-400" : "text-warm-white/60"
-          ].join(" ")}>{error || success || helperText}</span>
+          <span
+            id={describedBy}
+            role="status"
+            aria-live="polite"
+            className={[
+              "text-xs",
+              error ? "text-red-400" : success ? "text-emerald-400" : "text-warm-white/80"
+            ].join(" ")}
+          >
+            {error || success || helperText}
+          </span>
         ) : null}
       </label>
     );
