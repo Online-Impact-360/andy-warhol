@@ -9,7 +9,7 @@ const lora = Lora({ subsets: ['latin'], weight: ['400'] });
 
 export default function AboutArtistSection() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-amber-950 via-stone-900 to-black text-white overflow-x-hidden">
+    <section id="about" className="min-h-screen bg-linear-to-br from-amber-950 via-stone-900 to-black text-white overflow-x-hidden">
       {/* Hero Section */}
       <div className="relative flex items-center justify-center px-8 py-10 md:py-20" style={{ background: 'linear-gradient(to bottom, #241515, #1A0F0F)' }}>
         {/* Background Image Overlay */}
@@ -27,6 +27,20 @@ export default function AboutArtistSection() {
                 fill
                 className="object-cover object-center absolute right-0 top-0 z-10"
                 priority
+              />
+              {/* Color grade overlay for luxury palette */}
+              <div
+                className="absolute inset-0 z-20"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(183,149,75,0.28) 10%, rgba(20,20,20,0.4) 60%, rgba(0,0,0,0.6) 100%)',
+                  mixBlendMode: 'multiply',
+                  opacity: 0.95,
+                }}
+              />
+              {/* Soft vignette for depth */}
+              <div
+                className="absolute inset-0 pointer-events-none z-30"
+                style={{ boxShadow: 'inset 0 0 1400px rgba(0,0,0,0.85)' }}
               />
           </div>
         </motion.div>
@@ -67,7 +81,7 @@ export default function AboutArtistSection() {
       {/* Marlon Section */}
       <div className="relative bg-black/60 backdrop-blur-sm py-20 px-8">
         <div className="max-w-content mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-14 lg:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -108,7 +122,7 @@ export default function AboutArtistSection() {
             </motion.div>
 
             <motion.div
-              className="flex justify-center"
+              className="flex justify-center mt-10 md:mt-0"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -130,14 +144,35 @@ export default function AboutArtistSection() {
                   whileHover={{ scale: 1.02, rotate: 1 }}
                 >
                   <div className="frame-gold bg-[#0e0e0e] p-3 w-full max-w-md">
-                    <Image
-                      src="/marlon1.jpg"
-                      width={600}
-                      height={600}
-                      alt="Marlon Brando Pop Art"
-                      className="w-full h-auto object-cover"
-                      style={{ filter: 'contrast(1.2) saturate(1.3)' }}
-                    />
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image
+                        src="/marlon-min.jpg"
+                        width={600}
+                        height={600}
+                        alt="Marlon Brando Pop Art"
+                        className="w-full h-auto object-cover select-none"
+                        quality={100}
+                      />
+                      {/* Luxury color grade */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(183,149,75,0.25) 10%, rgba(20,20,20,0.35) 65%, rgba(0,0,0,0.5) 100%)',
+                          mixBlendMode: 'multiply',
+                          opacity: 0.95,
+                        }}
+                      />
+                      {/* Soft vignette */}
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{ boxShadow: 'inset 0 0 220px rgba(0,0,0,0.6)' }}
+                      />
+                      {/* Gold inner keyline */}
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{ boxShadow: 'inset 0 0 0 1px rgba(212, 175, 55, 0.4)' }}
+                      />
+                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -148,7 +183,7 @@ export default function AboutArtistSection() {
 
       {/* About Section */}
       <div className="relative py-32 px-8 bg-linear-to-b from-black/60 to-stone-900">
-        <div className="max-w-content mx-auto">
+        <div className="">
           <motion.h2
             className="text-6xl md:text-7xl font-serif font-bold mb-8 text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -180,7 +215,7 @@ export default function AboutArtistSection() {
           </motion.h2>
 
           <motion.p
-            className={`${lora.className} text-lg md:text-xl leading-relaxed text-gray-300 mb-12 text-center max-w-[1000px] mx-auto`}
+            className={`${lora.className} text-lg md:text-xl leading-relaxed text-gray-300 mb-12! text-center wrap mx-auto`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -200,6 +235,6 @@ export default function AboutArtistSection() {
           </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

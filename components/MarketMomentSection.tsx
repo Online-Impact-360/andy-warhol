@@ -56,7 +56,7 @@ const articles = [
 
 const MarketMomentSection = () => {
   return (
-    <section className="bg-bg-soft text-white pt-28 md:pt-32 pb-20 px-6 md:px-16">
+    <section id="press" className="bg-bg-soft text-white pt-28 md:pt-32 pb-20 px-6 md:px-16">
       <div className="max-w-page mx-auto">
         {/* Accent line */}
         <div className="w-16 h-[2px] bg-gold mb-4"></div>

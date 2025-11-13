@@ -83,7 +83,7 @@ function InquirySection() {
   }
 
   return (
-    <section ref={ref} className="relative w-full bg-[#111] text-warm-white py-24 md:py-32 overflow-hidden">
+    <section ref={ref} id="inquiry" className="relative w-full bg-[#111] text-warm-white py-16 md:py-32 overflow-hidden">
       {/* Desaturated portrait background on right with dark radial gradient */}
       <motion.div
         className="absolute right-0 top-0 bottom-0 w-full h-full hidden md:block"
@@ -96,10 +96,10 @@ function InquirySection() {
           <div className="col-span-1"></div>
           <div className="col-span-2 md:col-span-1 relative">
             <Image
-              src="/man_standing_sideways.png"
+              src="/Andy3.png"
               alt="Warhol silhouette"
               fill
-              className="object-cover absolute right-0 top-10 grayscale w-full h-full"
+              className="object-cover absolute right-0 top-10 w-full h-full"
             />
           </div>
         </div>
@@ -193,11 +193,11 @@ function InquirySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-            className="mt-10 md:mt-12 max-w-3xl inquiry-form"
+            className="mt-10 md:mt-12 max-w-3xl inquiry-form transition-all duration-300 hover:translate-y-[-2px] shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] focus-within:shadow-[0_0_25px_rgba(212,175,55,0.3)] focus-within:ring-1 focus-within:ring-gold/50"
           >
-            <div className="p-6 md:p-8 space-y-7 bg-[#1A1A1A] rounded-none border border-line">
+            <div className="p-6 md:p-8 space-y-8 bg-[#1A1A1A] rounded-none border border-line">
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
@@ -215,7 +215,7 @@ function InquirySection() {
               </motion.div>
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
@@ -233,7 +233,7 @@ function InquirySection() {
                   </MotionSelect>
                 </motion.div>
                 <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5"
                   variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}
                 >
                   <MotionInput id="city" name="city" value={values.city} onChange={handleChange} label="City" type="text" placeholder="City" className="rounded-none border-line focus:border-gold text-[16px]" />
@@ -246,7 +246,7 @@ function InquirySection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-                className="md:mt-1"
+                className=""
               >
                 <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} className="rounded-none border-line focus:border-gold text-[16px]" />
               </motion.div>
@@ -285,7 +285,7 @@ function InquirySection() {
 
               {/* Submit Button - 48px height, full width on mobile */}
               <motion.div
-                className="pt-3"
+                className="pt-5"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}

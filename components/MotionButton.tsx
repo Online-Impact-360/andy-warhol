@@ -7,6 +7,7 @@ export type ButtonVariant = "primary" | "secondary" | "ghost";
 
 export interface MotionButtonProps extends HTMLMotionProps<"button"> {
   variant?: ButtonVariant;
+  href?: string;
 }
 
 // Tailwind utility classes - proper Tailwind CSS v4 approach
@@ -21,8 +22,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   ghost: "border border-warm-white/40 text-warm-white hover:bg-warm-white/10 px-5 py-3",
 };
 
-const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
-  ({ variant = "primary", className = "", children, disabled, ...props }, ref) => {
+const MotionButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, MotionButtonProps>(
+  ({ variant = "primary", className = "", children, disabled, href, ...props }, ref) => {
     const classes = [baseClasses, variantClasses[variant], className]
       .filter(Boolean)
       .join(" ");
@@ -55,9 +56,32 @@ const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
             whileTap: { scale: 0.98 },
           };
 
+    if (href) {
+      return (
+        <motion.a
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          href={href}
+          className={classes}
+          style={
+            variant === "primary"
+              ? {
+                  background: "linear-gradient(135deg, #b7954b 0%, #d1b068 50%, #8f6f2e 100%)",
+                }
+              : undefined
+          }
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={commonTransition}
+          {...hoverTap}
+        >
+          {children}
+        </motion.a>
+      );
+    }
+
     return (
       <motion.button
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
         className={classes}
         style={
           variant === "primary"

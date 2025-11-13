@@ -35,6 +35,7 @@ function VisualGallerySection() {
 
   return (
     <section
+      id="gallery"
       className="w-full bg-black"
     >
       <div className="wrap-wide mx-auto relative">
@@ -79,12 +80,12 @@ function VisualGallerySection() {
           <div className="sticky top-0 h-screen overflow-hidden">
             <motion.div
               style={{ x }}
-              className="flex h-full items-center"
+              className="flex h-full items-center transform-gpu will-change-transform"
             >
               {slides.map((s, i) => (
                 <div key={i} className="relative w-full h-full shrink-0 flex flex-col items-center justify-center">
                   <motion.div
-                    className="relative w-[80vw] h-[80vh] overflow-hidden rounded-none border-2 border-[rgba(212,180,105,.35)]"
+                    className="relative w-[90vw] h-[60vh] md:w-[80vw] md:h-[80vh] overflow-hidden rounded-none border-2 border-[rgba(212,180,105,.35)] transform-gpu will-change-transform"
                     initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
                     whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                     viewport={{ once: false, amount: 0.5 }}
@@ -94,7 +95,9 @@ function VisualGallerySection() {
                       src={s.src}
                       alt={s.alt}
                       fill
-                      className="object-cover object-center"
+                      className="object-cover object-center select-none"
+                      sizes="(min-width: 1024px) 80vw, 90vw"
+                      quality={90}
                       priority={i === 0}
                     />
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />

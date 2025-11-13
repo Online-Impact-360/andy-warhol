@@ -12,6 +12,7 @@ function ProvenanceSection() {
     return (
         <section
             ref={ref}
+            id="provenance"
             className="relative w-full text-[#F2F2F2] bg-black py-24 md:py-32 overflow-hidden section"
         >
             {/* Background document with blur and dark overlay */}

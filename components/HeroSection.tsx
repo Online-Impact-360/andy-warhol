@@ -12,7 +12,7 @@ function HeroSection() {
                     <motion.div
                         initial={{ scale: 1, x: "0%", y: "0%" }}
                         animate={{
-                            scale: [1, 1.1],
+                            scale: [1, 1.05],
                             x: ["0%", "3%"],
                             y: ["0%", "3%"],
                         }}
@@ -22,14 +22,16 @@ function HeroSection() {
                             repeat: Infinity,
                             repeatType: "mirror",
                         }}
-                        className="relative w-full h-full"
+                        className="relative w-full h-full transform-gpu will-change-transform"
                     >
                         <Image
-                            src="/marlon1.jpg"
+                            src="/marlon-min.jpg"
                             alt="Brando silkscreen background"
                             fill
                             priority
-                            className="object-cover object-top"
+                            className="object-cover object-top select-none"
+                            sizes="(min-width: 1024px) 75vw, 90vw"
+                            quality={100}
                         />
                         {/* Duotone overlay: #CDAE5A at 62% multiply */}
                         <div
@@ -78,14 +80,14 @@ function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
                     >
-                        <MotionButton variant="primary">REQUEST PRIVATE ACCESS</MotionButton>
-                        <MotionButton variant="secondary">VIEW THE STORY</MotionButton>
+                        <MotionButton variant="primary" href="#inquiry">REQUEST PRIVATE ACCESS</MotionButton>
+                        <MotionButton variant="secondary" href="#narrative">VIEW THE STORY</MotionButton>
                     </motion.div>
                 </div>
 
                 {/* Right portrait with Vignette */}
                 <motion.div
-                    className="absolute right-0 bottom-[5%] w-[400px] h-[600px] overflow-hidden"
+                    className="absolute right-0 bottom-[5%] w-[400px] h-[300px] md:h-[600px] overflow-hidden"
                     initial={{ y: 10 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}

@@ -178,6 +178,7 @@ body {
 
 html {
   line-height: var(--lh-body);
+  scroll-behavior: smooth;
 }
 
 /* Typography Hierarchy */
@@ -301,9 +302,13 @@ li {
 
 .timeline {
   display: flex;
-  gap: 48px;
+  gap: 30px;
   align-items: center;
   margin-top: 28px;
+  
+  @media (min-width: 768px) {
+    gap: 48px;
+  }
 }
 
 .timeline .dot {
@@ -396,6 +401,15 @@ li {
   filter: grayscale(100%);
 }
 
+/* Default offset so anchored sections don't get flush to the top */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+@media (max-width: 640px) {
+  section[id] { scroll-margin-top: 64px; }
+}
+
 .yellow-overlay {
   position: absolute;
   top: 0;
@@ -443,7 +457,6 @@ li {
 }
 
 .silkscreen .lead {
-  max-width: 780px;
   color: var(--color-ink-dim);
   margin: 14px 0 28px;
   font-size: var(--font-size-body);

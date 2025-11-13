@@ -18,13 +18,14 @@ function NarrativeSection() {
   return (
     <section
       ref={ref}
+      id="narrative"
       className="relative w-full text-warm-white py-28 md:py-36 bg-charcoal overflow-hidden transition-colors duration-700"
     >
-      {/* optional top gradient to blend from previous section */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-charcoal to-transparent pointer-events-none" />
+      {/* top gradient to blend from previous section (responsive height) */}
+      <div className="absolute top-0 left-0 w-full h-20 md:h-32 bg-linear-to-b from-charcoal to-transparent pointer-events-none" />
 
       <div className="max-w-content mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-12 gap-10 md:gap-14 items-start">
+        <div className="grid grid-cols-12 gap-8 md:gap-16 lg:gap-20 items-start">
           {/* Left Text Column */}
           <div className="col-span-12 lg:col-span-5">
             <motion.div
@@ -48,7 +49,7 @@ function NarrativeSection() {
             </motion.div>
 
             <motion.div
-              className="mt-8 space-y-6 text-[1.1rem] leading-relaxed text-warm-white/90"
+              className="mt-8 space-y-6 text-[1.1rem] leading-relaxed text-warm-white/90 px-4"
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.4 }}
@@ -76,13 +77,12 @@ function NarrativeSection() {
           </div>
 
           {/* Right Photo Column */}
-          <div className="col-span-12 lg:col-span-7">
-            <div className="grid grid-cols-2 gap-4 md:gap-6 items-
-            center">
+          <div className="col-span-12 lg:col-span-7 mt-12 lg:mt-0">
+            <div className="grid grid-cols-2 gap-4 md:gap-6 items-center">
               {/* Left photo with parallax and frame */}
               <motion.div
                 style={{ y: yLeft }}
-                className="relative aspect-square"
+                className="relative aspect-4/5 md:aspect-square"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -98,6 +98,18 @@ function NarrativeSection() {
                       fill
                       className="object-cover object-center"
                     />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(183,149,75,0.25) 10%, rgba(20,20,20,0.35) 65%, rgba(0,0,0,0.5) 100%)',
+                        mixBlendMode: 'multiply',
+                        opacity: 0.9,
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ boxShadow: 'inset 0 0 220px rgba(0,0,0,0.6)' }}
+                    />
                     {/* Gold inner shadow 1px */}
                     <div
                       className="absolute inset-0 pointer-events-none"
@@ -112,7 +124,7 @@ function NarrativeSection() {
               {/* Right photo with opposite parallax and frame */}
               <motion.div
                 style={{ y: yRight }}
-                className="relative aspect-square"
+                className="relative aspect-4/5 md:aspect-square"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -131,6 +143,18 @@ function NarrativeSection() {
                       alt="Archival Warhol photograph"
                       fill
                       className="object-cover object-center"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(183,149,75,0.25) 10%, rgba(20,20,20,0.35) 65%, rgba(0,0,0,0.5) 100%)',
+                        mixBlendMode: 'multiply',
+                        opacity: 0.9,
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ boxShadow: 'inset 0 0 220px rgba(0,0,0,0.6)' }}
                     />
                     {/* Gold inner shadow 1px */}
                     <div
