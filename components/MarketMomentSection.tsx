@@ -93,6 +93,7 @@ const MarketMomentSection = () => {
                   alt={item.title}
                   fill
                   className="object-cover object-center"
+                  loading="lazy"
                 />
                 {/* Uniform warm grade overlay */}
                 <div className="pointer-events-none absolute inset-0 bg-[rgba(212,175,55,0.10)] mix-blend-overlay"></div>

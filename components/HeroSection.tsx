@@ -85,26 +85,24 @@ function HeroSection() {
                     </motion.div>
                 </div>
 
-                {/* Right portrait with Vignette */}
+                {/* Right portrait with masked fade into background */}
                 <motion.div
                     className="absolute right-0 bottom-[5%] w-[400px] h-[300px] md:h-[600px] overflow-hidden"
                     initial={{ y: 10 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}
+                    style={{
+                        WebkitMaskImage: 'radial-gradient(140% 140% at 100% 100%, black 62%, transparent 92%)',
+                        maskImage: 'radial-gradient(140% 140% at 100% 100%, black 62%, transparent 92%)',
+                    }}
                 >
                     <Image
-                        src="/man_standing_sideways.png"
+                        src="/henry.png"
                         alt="Curator portrait"
                         fill
                         className="object-cover"
+                        loading="lazy"
                         sizes="460px"
-                    />
-                    {/* Radial gradient vignette from right edge */}
-                    <div
-                        className="absolute inset-0 pointer-events-none"
-                        style={{
-                            background: 'radial-gradient(ellipse at 100% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,1) 100%)',
-                        }}
                     />
                 </motion.div>
             </div>

@@ -24,6 +24,7 @@ const Footer = () => {
               width={100}
               height={60}
               className="opacity-90 hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
             />
           </div>
 
@@ -35,6 +36,7 @@ const Footer = () => {
               width={100}
               height={60}
               className="opacity-90 hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
             />
           </div>
         </div>

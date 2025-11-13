@@ -67,9 +67,6 @@ function VisualGallerySection() {
           className="absolute inset-0 pointer-events-none bg-linear-to-b from-black/20 via-transparent to-black/20"
           style={{ opacity: useTransform(scrollYProgress, [0, 1], [0.3, 0.7]) }}
         />
-        {/* <div className="pointer-events-none absolute top-10 left-0 right-0 h-[2px] bg-[rgba(212,180,105,.35)] z-10" />
-        <div className="pointer-events-none absolute bottom-12 left-0 right-0 h-[2px] bg-[rgba(212,180,105,.35)] z-10" /> */}
-
         <section
           ref={sectionRef}
           style={{
@@ -99,6 +96,11 @@ function VisualGallerySection() {
                       sizes="(min-width: 1024px) 80vw, 90vw"
                       quality={90}
                       priority={i === 0}
+                      loading={i === 0 ? undefined : 'lazy'}
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{ background: 'rgba(212,175,55,0.08)', mixBlendMode: 'overlay' }}
                     />
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.5)_100%)]" />
 

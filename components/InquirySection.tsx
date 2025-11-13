@@ -88,18 +88,26 @@ function InquirySection() {
       <motion.div
         className="absolute right-0 top-0 bottom-0 w-full h-full hidden md:block"
         initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 0.3, x: 0 }}
+        whileInView={{ opacity: 0.24, x: 0 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
         viewport={{ once: true }}
       >
         <div className="grid grid-cols-2 w-full h-full">
           <div className="col-span-1"></div>
-          <div className="col-span-2 md:col-span-1 relative">
+          <div
+            className="col-span-2 md:col-span-1 relative"
+            style={{
+              WebkitMaskImage: 'radial-gradient(160% 160% at 100% 100%, black 58%, transparent 82%)',
+              maskImage: 'radial-gradient(160% 160% at 100% 100%, black 58%, transparent 82%)',
+              filter: 'grayscale(55%) contrast(110%) brightness(85%)',
+            }}
+          >
             <Image
-              src="/Andy3.png"
+              src="/henry.png"
               alt="Warhol silhouette"
               fill
               className="object-cover absolute right-0 top-10 w-full h-full"
+              loading="lazy"
             />
           </div>
         </div>

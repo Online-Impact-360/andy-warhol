@@ -11,7 +11,7 @@ export default function AboutArtistSection() {
   return (
     <section id="about" className="min-h-screen bg-linear-to-br from-amber-950 via-stone-900 to-black text-white overflow-x-hidden">
       {/* Hero Section */}
-      <div className="relative flex items-center justify-center px-8 py-10 md:py-20" style={{ background: 'linear-gradient(to bottom, #241515, #1A0F0F)' }}>
+      <div className="relative flex items-center justify-center px-8 py-10 md:py-20 bg-[#000]" >
         {/* Background Image Overlay */}
         <motion.div
           className="absolute right-0 top-0 w-full h-full overflow-hidden z-0"
@@ -20,7 +20,7 @@ export default function AboutArtistSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
         >
-          <div className="w-full h-full relative">
+          <div className="w-full wrap h-full relative">
               <Image
                 src="/Andy.jpg"
                 alt="Andy Warhol silhouette"
@@ -34,13 +34,7 @@ export default function AboutArtistSection() {
                 style={{
                   background: 'linear-gradient(135deg, rgba(183,149,75,0.28) 10%, rgba(20,20,20,0.4) 60%, rgba(0,0,0,0.6) 100%)',
                   mixBlendMode: 'multiply',
-                  opacity: 0.95,
                 }}
-              />
-              {/* Soft vignette for depth */}
-              <div
-                className="absolute inset-0 pointer-events-none z-30"
-                style={{ boxShadow: 'inset 0 0 1400px rgba(0,0,0,0.85)' }}
               />
           </div>
         </motion.div>
@@ -152,6 +146,7 @@ export default function AboutArtistSection() {
                         alt="Marlon Brando Pop Art"
                         className="w-full h-auto object-cover select-none"
                         quality={100}
+                        loading="lazy"
                       />
                       {/* Luxury color grade */}
                       <div
@@ -182,7 +177,7 @@ export default function AboutArtistSection() {
       </div>
 
       {/* About Section */}
-      <div className="relative py-32 px-8 bg-linear-to-b from-black/60 to-stone-900">
+      <div className="relative py-24 px-8 bg-linear-to-b from-black/60 to-stone-900">
         <div className="">
           <motion.h2
             className="text-6xl md:text-7xl font-serif font-bold mb-8 text-center"

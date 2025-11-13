@@ -89,7 +89,7 @@ function NarrativeSection() {
                 transition={{ duration: 0.7, ease: 'easeOut' }}
               >
                 <div
-                  className="relative w-full h-full p-1.5 frame-gold bg-offwhite"
+                  className="relative w-full h-full p-1.5 frame-gold"
                 >
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
@@ -97,14 +97,7 @@ function NarrativeSection() {
                       alt="Painting on easel"
                       fill
                       className="object-cover object-center"
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(183,149,75,0.25) 10%, rgba(20,20,20,0.35) 65%, rgba(0,0,0,0.5) 100%)',
-                        mixBlendMode: 'multiply',
-                        opacity: 0.9,
-                      }}
+                      loading="lazy"
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"
@@ -131,9 +124,8 @@ function NarrativeSection() {
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
               >
                 <div
-                  className="relative w-full h-full p-1.5"
+                  className="relative w-full h-full p-1.5 frame-gold"
                   style={{
-                    backgroundColor: '#EAE6DF', // 6px off-white keyline
                     boxShadow: '0 12px 40px rgba(0,0,0,0.45)', // Drop shadow
                   }}
                 >
@@ -143,14 +135,7 @@ function NarrativeSection() {
                       alt="Archival Warhol photograph"
                       fill
                       className="object-cover object-center"
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(183,149,75,0.25) 10%, rgba(20,20,20,0.35) 65%, rgba(0,0,0,0.5) 100%)',
-                        mixBlendMode: 'multiply',
-                        opacity: 0.9,
-                      }}
+                      loading="lazy"
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"
