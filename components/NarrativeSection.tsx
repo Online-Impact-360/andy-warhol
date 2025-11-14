@@ -93,7 +93,7 @@ function NarrativeSection() {
                 >
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
-                      src="/Andy-Warhol-Marlon-Brando-2.jpg"
+                      src="/Andy-Warhol-Marlon-Brando-B2.jpg"
                       alt="Painting on easel"
                       fill
                       className="object-cover object-center"
@@ -131,7 +131,7 @@ function NarrativeSection() {
                 >
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
-                      src="/Andy-Warhol-Marlon-Brando-1.jpg"
+                      src="/Andy-Warhol-Marlon-Brando-A2.jpg"
                       alt="Archival Warhol photograph"
                       fill
                       className="object-cover object-center"
