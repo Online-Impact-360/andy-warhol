@@ -19,10 +19,8 @@ function InquirySection() {
     country: '',
     message: '',
   })
-  const [ndaAgreed, setNdaAgreed] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [sent, setSent] = useState(false)
-  const [showNdaModal, setShowNdaModal] = useState(false)
   const [showToast, setShowToast] = useState(false)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
@@ -38,7 +36,6 @@ function InquirySection() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) er.email = 'Enter a valid email address'
     if (!values.role) er.role = 'Please select one'
     if (!values.message || values.message.trim().length < 10) er.message = 'Please add a short message (min 10 chars)'
-    if (!ndaAgreed) er.nda = 'You must agree to the NDA terms'
     return er
   }
 
@@ -73,7 +70,6 @@ function InquirySection() {
       setShowToast(true)
       setTimeout(() => setShowToast(false), 4000)
       setValues({ fullName: '', email: '', role: '', city: '', country: '', message: '' })
-      setNdaAgreed(false)
       setErrors({})
     } catch {
       setErrors((prev) => ({ ...prev, form: 'Something went wrong. Please try again.' }))
@@ -162,7 +158,7 @@ function InquirySection() {
                 show: { opacity: 1, y: 0 }
               }}
             >
-              Due to the confidential nature of this artwork, full provenance, documentation, and viewing arrangements are available exclusively to verified collectors, dealers, or representatives.
+              Due to the confidential nature of this artwork, provenance materials, supporting documentation, and viewing arrangements are made available on a selective basis to qualified collectors, dealers, advisors, and institutional representatives.
             </motion.p>
             <motion.p
               className="mt-4 text-warm-white/90 text-[18px] md:text-[19px] leading-relaxed"
@@ -171,7 +167,7 @@ function InquirySection() {
                 show: { opacity: 1, y: 0 }
               }}
             >
-              Please complete the form below to begin the private access process. You will receive a secure NDA for digital signature before viewing the complete provenance record.
+              Please complete the form below to initiate a private access request. Submissions are reviewed individually. Qualified parties may be invited to execute a confidentiality agreement as part of the evaluation process prior to any disclosure of sensitive materials.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -256,11 +252,11 @@ function InquirySection() {
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
                 className=""
               >
-                <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest" error={errors.message} className="rounded-none border-line focus:border-gold text-[16px]" />
+                <MotionTextarea id="message" name="message" value={values.message} onChange={handleChange} label="Message" rows={5} placeholder="Tell us about your interest or representation context" error={errors.message} className="rounded-none border-line focus:border-gold text-[16px]" />
               </motion.div>
 
               {/* NDA Checkbox */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -289,8 +285,7 @@ function InquirySection() {
                   </span>
                 </label>
                 {errors.nda && <p className="text-red-400 text-xs mt-1">{errors.nda}</p>}
-              </motion.div>
-
+              </motion.div> */}
               {/* Submit Button - 48px height, full width on mobile */}
               <motion.div
                 className="pt-5"
@@ -300,7 +295,7 @@ function InquirySection() {
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
               >
                 <MotionButton type="submit" variant="primary" disabled={submitting} className="btn-primary w-full md:w-auto">
-                  {submitting ? 'Submitting...' : 'Request Provenance Access'}
+                  {submitting ? 'Submitting...' : 'Submit Access Request'}
                 </MotionButton>
               </motion.div>
             </div>
@@ -308,7 +303,7 @@ function InquirySection() {
         )}
 
         {/* NDA Modal */}
-        {showNdaModal && (
+        {/* {showNdaModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" onClick={() => setShowNdaModal(false)}>
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -329,8 +324,8 @@ function InquirySection() {
               </button>
             </motion.div>
           </div>
-        )}
-      </div>
+        )} */}
+              </div>
     </section>
   )
 }

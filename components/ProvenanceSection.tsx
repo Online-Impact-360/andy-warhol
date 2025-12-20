@@ -75,13 +75,13 @@ function ProvenanceSection() {
                                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
                             >
                                 <motion.p variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
-                                    Acquired directly from Andy Warhol&apos;s legal counsel, Si Litvinoff, this silkscreen of Marlon Brando has remained in private hands for over four decades.
+                                    Acquired directly from a close member of Andy Warhol&apos;s inner circle, this silkscreen of Marlon Brando has remained in private hands for over four decades.
                                 </motion.p>
                                 <motion.p variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
-                                    Accompanied by notarized documentation, payment records, and personal correspondence between Warhol and Litvinoff, the chain of custody is meticulously preserved and authenticated.
+                                    The work is accompanied by extensive contemporaneous documentation, including notarized records, payment materials, and personal correspondence evidencing the original transfer and long-term custody.
                                 </motion.p>
                                 <motion.p className="text-sm" variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
-                                    <span className="text-gold">—</span> Full provenance documentation available to qualified collectors under a signed Non-Disclosure Agreement.
+                                    <span className="text-gold">—</span> Full provenance documentation is available to qualified parties under a signed Non-Disclosure Agreement.
                                 </motion.p>
                             </motion.div>
 

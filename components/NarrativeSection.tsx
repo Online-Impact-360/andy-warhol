@@ -59,9 +59,9 @@ function NarrativeSection() {
               }}
             >
               {[
-                "For decades, this work has existed outside the public eye — part of a select few Warhol pieces transferred in lieu of payment for legal services during the artist’s prolific years in New York.",
-                "It embodies a rare intersection of pop culture, art history, and private patronage, representing not only Warhol’s fascination with fame but also his personal network of creative and professional collaborators.",
-                "With comprehensive provenance and independent authentication, this silkscreen stands among the most compelling rediscoveries of Warhol’s Brando series.",
+                "For decades, this work remained outside the public eye, privately held following a direct transfer from Andy Warhol’s professional circle during one of the most influential periods of his career.",
+                "The piece embodies a rare convergence of pop culture, art history, and private patronage, capturing Warhol’s enduring fascination with celebrity and his tightly held creative network.",
+                "With extensive provenance documentation and independent authentication, this silkscreen ranks among the most significant rediscoveries from Warhol’s Marlon Brando series.",
               ].map((text, i) => (
                 <motion.p
                   key={i}

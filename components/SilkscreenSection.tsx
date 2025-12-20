@@ -36,8 +36,7 @@ export default function SilkscreenSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.12 }}
       >
-        A rare archival glimpse into Andy Warhol creating the <em>Marlon Brando</em> silkscreen.
-        The scale, composition, and format shown in the footage align closely with the privately held work featured here.
+        A rare archival glimpse of Andy Warhol producing a <em>Marlon Brando</em> silkscreen during his 1966 Factory period. The scale, composition, and format visible in the footage align closely with the privately held work presented here.
       </motion.p>
       <motion.div
         className="video frame-gold rounded-md w-full h-full overflow-hidden border border-gold/30 bg-black/20 shadow-[0_0_20px_rgba(212,175,55,0.12)] p-0!"
@@ -63,7 +62,7 @@ export default function SilkscreenSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.18 }}
       >
-        Filmed in Warhol’s studio, this clip reveals the methodical layering and registration intrinsic to his silkscreen practice. Note how the photographic source, scale, and tonal structure echo the present <em>Brando</em> work—underscoring continuity in process and intent.
+        Based on comparative analysis of known Marlon Brando paintings from this period, no other documented example matches the dimensions and proportions observed in the archival footage as precisely as the present work.
       </motion.p>
       <motion.div
         className="source mt-3 text-white/60 text-sm"
