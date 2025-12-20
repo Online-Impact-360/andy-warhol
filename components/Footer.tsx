@@ -56,9 +56,9 @@ const Footer = () => {
         </p>
 
         {/* Legal Line - 70% white */}
-        <p className="font-inter text-xs text-white/70">
+        {/* <p className="font-inter text-xs text-white/70">
           &copy; Gregory E. Micallef. All rights reserved.
-        </p>
+        </p> */}
 
         {/* Privacy / NDA Links */}
         <div className="flex items-center gap-4 font-inter text-xs">
