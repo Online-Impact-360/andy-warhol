@@ -38,9 +38,9 @@ export async function POST(req: Request) {
         user,
         pass,
       },
-      tls: {
-        rejectUnauthorized: false,
-      }
+      // tls: {
+      //   rejectUnauthorized: false,
+      // }
     });
 
     // Verify transporter configuration
@@ -90,40 +90,41 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions);
 
-    // Optional: Send confirmation email to requester with NDA link
-    const ndaLink = process.env.NDA_LINK as string | undefined;
-    const confirmHtml = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Your Private Access Request</title>
-      </head>
-      <body style="font-family: Arial, sans-serif; color: #111;">
-        <div style="max-width:640px;margin:0 auto;padding:16px;">
-          <h2>Thank you, ${data.fullName}</h2>
-          <p>We received your request for private access regarding the Warhol artwork.</p>
-          ${ndaLink ? `<p>Please review and sign the NDA to proceed:</p>
-          <p><a href="${ndaLink}" style="color:#c6a556;">Open NDA</a></p>` : `<p>We will contact you shortly with next steps.</p>`}
-        </div>
-      </body>
-      </html>
-    `;
+    //NDA functionality temporarily disabled
+    // // Optional: Send confirmation email to requester with NDA link
+    // const ndaLink = process.env.NDA_LINK as string | undefined;
+    // const confirmHtml = `
+    //   <!DOCTYPE html>
+    //   <html>
+    //   <head>
+    //     <meta charset="utf-8">
+    //     <meta name="viewport" content="width=device-width, initial-scale=1">
+    //     <title>Your Private Access Request</title>
+    //   </head>
+    //   <body style="font-family: Arial, sans-serif; color: #111;">
+    //     <div style="max-width:640px;margin:0 auto;padding:16px;">
+    //       <h2>Thank you, ${data.fullName}</h2>
+    //       <p>We received your request for private access regarding the Warhol artwork.</p>
+    //       ${ndaLink ? `<p>Please review and sign the NDA to proceed:</p>
+    //       <p><a href="${ndaLink}" style="color:#c6a556;">Open NDA</a></p>` : `<p>We will contact you shortly with next steps.</p>`}
+    //     </div>
+    //   </body>
+    //   </html>
+    // `;
 
-    const confirmOptions = {
-      from: process.env.EMAIL_FROM || user,
-      to: data.email,
-      subject: 'We received your request',
-      html: confirmHtml,
-      text: `We received your request. ${ndaLink ? `Please open the NDA: ${ndaLink}` : ''}`,
-    };
+    // const confirmOptions = {
+    //   from: process.env.EMAIL_FROM || user,
+    //   to: data.email,
+    //   subject: 'We received your request',
+    //   html: confirmHtml,
+    //   text: `We received your request. ${ndaLink ? `Please open the NDA: ${ndaLink}` : ''}`,
+    // };
 
-    try {
-      await transporter.sendMail(confirmOptions);
-    } catch {
-      // Silently ignore confirmation failures to not block the main flow
-    }
+    // try {
+    //   await transporter.sendMail(confirmOptions);
+    // } catch {
+    //   // Silently ignore confirmation failures to not block the main flow
+    // }
 
     return NextResponse.json({ success: true, message: "Email sent successfully" }, { status: 200 });
   } catch (error: unknown) {

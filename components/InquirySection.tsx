@@ -29,54 +29,130 @@ function InquirySection() {
     setErrors((er) => ({ ...er, [name]: '' }))
   }
 
+  // Update the validate function in InquirySection.tsx
   function validate() {
-    const er: Record<string, string> = {}
-    if (!values.fullName.trim()) er.fullName = 'Full name is required'
-    if (!values.email.trim()) er.email = 'Email is required'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) er.email = 'Enter a valid email address'
-    if (!values.role) er.role = 'Please select one'
-    if (!values.message || values.message.trim().length < 10) er.message = 'Please add a short message (min 10 chars)'
-    return er
+    const er: Record<string, string> = {};
+    const { fullName, email, role, city, country, message } = values;
+
+    // Full Name validation
+    if (!fullName.trim()) {
+      er.fullName = 'Full name is required';
+    } else if (fullName.length < 2) {
+      er.fullName = 'Full name must be at least 2 characters';
+    } else if (fullName.length > 100) {
+      er.fullName = 'Full name cannot exceed 100 characters';
+    } else if (!/^[a-zA-Z\s'-]+$/.test(fullName)) {
+      er.fullName = 'Name can only contain letters, spaces, hyphens, and apostrophes';
+    }
+
+    // Email validation
+    if (!email.trim()) {
+      er.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      er.email = 'Please enter a valid email address';
+    } else if (email.length > 100) {
+      er.email = 'Email cannot exceed 100 characters';
+    }
+
+    // Role validation
+    if (!role) {
+      er.role = 'Please select a role';
+    }
+
+    // City validation
+    if (city && city.length > 100) {
+      er.city = 'City name cannot exceed 100 characters';
+    } else if (city && !/^[a-zA-Z\s-]*$/.test(city)) {
+      er.city = 'City can only contain letters, spaces, and hyphens';
+    }
+
+    // Country validation
+    if (country && country.length > 100) {
+      er.country = 'Country name cannot exceed 100 characters';
+    } else if (country && !/^[a-zA-Z\s-]*$/.test(country)) {
+      er.country = 'Country can only contain letters, spaces, and hyphens';
+    }
+
+    // Message validation
+    if (!message.trim()) {
+      er.message = 'Message is required';
+    } else if (message.length < 10) {
+      er.message = 'Message must be at least 10 characters';
+    } else if (message.length > 2000) {
+      er.message = 'Message cannot exceed 2000 characters';
+    }
+
+    // Check for too many links
+    const linkCount = (message.match(/(http[s]?:\/\/[^\s]+)/g) || []).length;
+    if (linkCount > 2) {
+      er.message = 'Message can contain maximum 2 links';
+    }
+
+    return er;
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSent(false)
-    const er = validate()
-    if (Object.keys(er).length) {
-      setErrors(er)
-      return
-    }
-    setSubmitting(true)
-    try {
-      const res = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      })
-      let data: { success?: boolean; message?: string; errors?: Record<string, string> } | null = null
-      try { data = await res.json() } catch { }
-      if (!res.ok || !data?.success) {
-        if (data?.errors) {
-          setErrors((prev) => ({ ...prev, ...data.errors }))
-        } else {
-          const msg = (data && typeof data.message === 'string' && data.message.trim()) ? data.message : 'Something went wrong. Please try again.'
-          setErrors((prev) => ({ ...prev, form: msg }))
-        }
-        return
+  e.preventDefault();
+  setSent(false);
+  const er = validate();
+  
+  if (Object.keys(er).length) {
+    setErrors(er);
+    
+    // Scroll to the first error
+    const firstError = Object.keys(er)[0];
+    if (firstError) {
+      const element = document.querySelector(`[name="${firstError}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        (element as HTMLElement).focus();
       }
-
-      setSent(true)
-      setShowToast(true)
-      setTimeout(() => setShowToast(false), 4000)
-      setValues({ fullName: '', email: '', role: '', city: '', country: '', message: '' })
-      setErrors({})
-    } catch {
-      setErrors((prev) => ({ ...prev, form: 'Something went wrong. Please try again.' }))
-    } finally {
-      setSubmitting(false)
     }
+    
+    return;
   }
+
+  setSubmitting(true);
+  try {
+    const res = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values),
+    });
+    
+    const data = await res.json();
+    
+    if (!res.ok) {
+      if (data.errors) {
+        setErrors((prev) => ({ ...prev, ...data.errors }));
+      } else {
+        const msg = data?.message || 'Something went wrong. Please try again.';
+        setErrors((prev) => ({ ...prev, form: msg }));
+      }
+      return;
+    }
+
+    setSent(true);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 4000);
+    setValues({ 
+      fullName: '', 
+      email: '', 
+      role: '', 
+      city: '', 
+      country: '', 
+      message: '' 
+    });
+    setErrors({});
+  } catch {
+    setErrors((prev) => ({ 
+      ...prev, 
+      form: 'Something went wrong. Please try again.' 
+    }));
+  } finally {
+    setSubmitting(false);
+  }
+}
 
   return (
     <section ref={ref} id="inquiry" className="relative w-full bg-[#111] text-warm-white py-16 md:py-32 overflow-hidden">
@@ -211,7 +287,17 @@ function InquirySection() {
                 }}
               >
                 <motion.div variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}>
-                  <MotionInput id="fullName" name="fullName" value={values.fullName} onChange={handleChange} label="Full Name" type="text" placeholder="Your full name" error={errors.fullName} className="rounded-none border-line focus:border-gold text-[16px]" />
+                  <MotionInput 
+                    id="fullName" 
+                    name="fullName" 
+                    value={values.fullName} 
+                    onChange={handleChange} 
+                    label="Full Name" 
+                    type="text" 
+                    placeholder="Your full name" 
+                    error={errors.fullName} 
+                    className="rounded-none border-line focus:border-gold text-[16px]" 
+                  />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}>
                   <MotionInput id="email" name="email" value={values.email} onChange={handleChange} label="Email Address" type="email" placeholder="you@example.com" error={errors.email} className="rounded-none border-line focus:border-gold text-[16px]" />
@@ -325,7 +411,7 @@ function InquirySection() {
             </motion.div>
           </div>
         )} */}
-              </div>
+      </div>
     </section>
   )
 }
