@@ -197,7 +197,7 @@ function InquirySection() {
             aria-live="polite"
             className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gold text-charcoal px-4 py-2 rounded-md shadow"
           >
-            Request submitted. Check your email for the NDA link.
+            Request submitted successfully. We&apos;ll review your inquiry and respond shortly.
           </motion.div>
         )}
         <motion.div
@@ -256,7 +256,7 @@ function InquirySection() {
             className="mt-8 p-6 bg-emerald-900/20 border border-emerald-500/30 rounded-md max-w-3xl"
           >
             <h3 className="font-inter text-emerald-400 text-lg font-semibold mb-2">Request Submitted Successfully</h3>
-            <p className="font-inter text-white/80 text-[0.95rem] mb-2">Thank you. We have received your request and an email confirmation has been sent.</p>
+            <p className="font-inter text-white/80 text-[0.95rem] mb-2">Thank you. We have received your request</p>
             <p className="font-inter text-white/60 text-[0.85rem] italic">Provenance access link will be emailed upon NDA execution.</p>
           </motion.div>
         )}
